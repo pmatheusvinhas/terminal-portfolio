@@ -61,6 +61,23 @@ To use the GitHub integration features:
 VITE_GITHUB_TOKEN=your_github_token
 ```
 
+## Personal Images
+
+The project uses personal images for the "Beyond Code" section. These images are not included in the repository for privacy reasons.
+
+To set up the images:
+
+1. Create an `images` directory in `public`:
+```bash
+mkdir -p public/images
+```
+
+2. Add your personal images with the following names:
+- `1.jpg`
+- `2.jpg`
+- `3.jpg`
+
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
@@ -83,6 +100,7 @@ If you'd like to fork this project:
 - Inspired by retro terminal interfaces
 - Built with React + TypeScript + Material-UI
 - GitHub integration for real-time analytics
+
 
 ## 🤝 Contributing
 

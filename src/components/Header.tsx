@@ -6,32 +6,14 @@ import { AvatarPixel } from './AvatarPixel';
 import { resumeData } from '../data/resume';
 
 export const Header: React.FC = () => {
-  const { header } = resumeData;
-
   return (
-    <Container
-      component={motion.div}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      sx={{
-        fontFamily: '"Fira Code", monospace',
-        position: 'relative',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          height: '2px',
-          background: 'linear-gradient(90deg, transparent, #bb86fc, transparent)',
-        },
-      }}
-    >
+    <Box>   
       <Box sx={{ 
-        my: 4,
-        display: 'flex',
-        alignItems: 'center',
-        gap: 4,
+        display: 'flex', 
+        flexDirection: { xs: 'column', sm: 'row' },
+        alignItems: { xs: 'flex-start', sm: 'center' },
+        gap: { xs: 1, sm: 2 },
+        mb: { xs: 2, md: 3 }
       }}>
         <Box>
           <AvatarPixel />
@@ -57,7 +39,7 @@ export const Header: React.FC = () => {
               sequence={[
                 'whoami',
                 1000,
-                header.name,
+                resumeData.header.name,
                 2000,
               ]}
               wrapper="span"
@@ -75,7 +57,7 @@ export const Header: React.FC = () => {
             <TypeAnimation
               sequence={[
                 2000,
-                header.title,
+                resumeData.header.title,
               ]}
               wrapper="span"
               speed={50}
@@ -102,13 +84,13 @@ export const Header: React.FC = () => {
             </Typography>
             <Box sx={{ pl: 2 }}>
               <Typography variant="body2" component="div">
-                📍 <span style={{ color: '#03dac6' }}>{header.location}</span>
+                📍 <span style={{ color: '#03dac6' }}>{resumeData.header.location}</span>
               </Typography>
               <Typography variant="body2" component="div">
-                📧 <Link href={`mailto:${header.email}`}>{header.email}</Link>
+                📧 <Link href={`mailto:${resumeData.header.email}`}>{resumeData.header.email}</Link>
               </Typography>
               <Typography variant="body2" component="div">
-                🔗 <Link href={header.github} target="_blank">github.com/pmatheusvinhas</Link>
+                🔗 <Link href={resumeData.header.github} target="_blank">github.com/pmatheusvinhas</Link>
               </Typography>
             </Box>
           </Box>
@@ -132,11 +114,11 @@ export const Header: React.FC = () => {
                 fontStyle: 'italic',
               }}
             >
-              {header.summary}
+              {resumeData.header.summary}
             </Typography>
           </Box>
         </Box>
       </Box>
-    </Container>
+    </Box>
   );
 }; 

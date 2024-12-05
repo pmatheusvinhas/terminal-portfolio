@@ -11,6 +11,7 @@ import { GitHubSection } from './components/GitHubSection';
 import { PrintButton } from './components/PrintButton';
 import { theme } from './theme';
 import './styles/global.css';
+import { Footer } from './components/Footer';
 
 const App: React.FC = () => {
   return (
@@ -19,7 +20,10 @@ const App: React.FC = () => {
       <div className="scanline no-print" />
       <div className="crt-effect no-print" />
       <PrintButton />
-      <Container maxWidth="lg">
+      <Container maxWidth="lg" sx={{ 
+        py: { xs: 2, sm: 4, md: 6 },
+        px: { xs: 2, sm: 3, md: 4 }
+      }}>
         <Header />
         <Box sx={{ my: 4 }}>
           <Skills />
@@ -36,6 +40,7 @@ const App: React.FC = () => {
         <Box sx={{ my: 4 }} className="no-print">
           <GitHubSection />
         </Box>
+        <Footer />
       </Container>
     </ThemeProvider>
   );
