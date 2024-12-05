@@ -1,0 +1,29 @@
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  a {
+    text-decoration: none !important;
+  }
+
+  /* Ajustes específicos para impressão */
+  .MuiContainer-root {
+    padding: 0 !important;
+    max-width: none !important;
+  }
+
+  .MuiPaper-root {
+    box-shadow: none !important;
+  }
+
+  /* Força quebra de página entre seções principais */
+  .page-break {
+    page-break-before: always;
+  }
+} 
