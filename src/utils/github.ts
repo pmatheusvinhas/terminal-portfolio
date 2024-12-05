@@ -1,9 +1,9 @@
-const GITHUB_TOKEN = import.meta.env.VITE_GITHUB_TOKEN;
+declare const __GITHUB_TOKEN__: string;
 
 export const githubFetch = (url: string) => {
   return fetch(url, {
     headers: {
-      'Authorization': `Bearer ${GITHUB_TOKEN}`,
+      'Authorization': `Bearer ${__GITHUB_TOKEN__}`,
       'Accept': 'application/vnd.github.v3+json'
     }
   });
