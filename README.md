@@ -52,7 +52,14 @@ To use the GitHub integration features:
    - read:user
    - read:project
    - repo (for private repos statistics)
-3. Add the token to your `.env` file
+3. Add the token to your repository secrets:
+   - Go to Settings > Secrets and variables > Actions
+   - Create a new secret named `PERSONAL_ACCESS_TOKEN`
+   - Paste your token
+4. Add the token to your local `.env` file:
+```
+VITE_GITHUB_TOKEN=your_github_token
+```
 
 ## 📄 License
 
