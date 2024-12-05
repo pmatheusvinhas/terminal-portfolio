@@ -133,4 +133,77 @@ body {
 ::selection {
   background: rgba(187, 134, 252, 0.3);
   color: #03dac6;
+}
+
+@media print {
+  /* Esconde elementos desnecessários */
+  .no-print,
+  .MuiTooltip-root,
+  .MuiFab-root {
+    display: none !important;
+  }
+
+  /* Ajusta o layout para impressão */
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Remove animações e efeitos */
+  * {
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Força quebras de página em seções específicas */
+  .page-break {
+    page-break-before: always;
+  }
+
+  /* Evita quebras de página dentro de elementos importantes */
+  .no-break {
+    page-break-inside: avoid;
+  }
+
+  /* Ajusta margens e espaçamentos */
+  .MuiContainer-root {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  /* Melhora a legibilidade do texto */
+  p, li {
+    line-height: 1.4 !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* Ajusta cores para melhor contraste */
+  .MuiTypography-root {
+    color: black !important;
+  }
+
+  .MuiTypography-colorPrimary {
+    color: #444 !important;
+  }
+
+  /* Otimiza o tamanho dos ícones */
+  .tech-icon {
+    width: 16px !important;
+    height: 16px !important;
+    margin: 2px !important;
+  }
+
+  /* Ajusta o layout das grids */
+  .MuiGrid-container {
+    gap: 8px !important;
+  }
+
+  /* Remove backgrounds desnecessários */
+  .MuiPaper-root {
+    background: none !important;
+    padding: 8px !important;
+    margin-bottom: 12px !important;
+  }
 } 
