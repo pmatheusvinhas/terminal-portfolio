@@ -5,7 +5,7 @@ export const resumeData = {
     location: "São Paulo, Brazil (UTC-3)",
     email: "paulomatheusvinhas@gmail.com",
     github: "https://github.com/pmatheusvinhas",
-    summary: `Senior Full Stack Engineer with 7 years of experience specializing in cloud-native solutions and IoT systems. 
+    summary: `Senior Full Stack Engineer with 5+ years of experience specializing in cloud-native solutions and IoT systems. 
     Expert in architecting distributed systems and real-time applications using Azure and AWS. 
     Proven track record of delivering high-impact solutions that process millions of requests daily.`
   },
