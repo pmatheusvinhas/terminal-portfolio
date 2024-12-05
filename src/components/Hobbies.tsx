@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography, Paper, Grid } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Pets, RadioOutlined, SelfImprovement } from '@mui/icons-material';
 import { resumeData } from '../data/resume';
 

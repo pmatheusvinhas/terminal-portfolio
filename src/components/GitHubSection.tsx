@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Paper, Grid, CircularProgress, Tooltip } from '@mui/material';
+import { Box, Typography, Paper, Grid, CircularProgress } from '@mui/material';
 import { motion } from 'framer-motion';
 import { TechIcon } from './TechIcon';
 import { resumeData } from '../data/resume';
@@ -74,12 +74,6 @@ export const GitHubSection: React.FC = () => {
   useEffect(() => {
     const fetchGithubData = async () => {
       try {
-        // Fetch user data for avatar
-        const userResponse = await githubFetch(
-          `https://api.github.com/users/${username}`
-        );
-        const userData = await userResponse.json();
-
         // Fetch ALL repos (including private ones)
         const reposResponse = await githubFetch(
           `https://api.github.com/user/repos?per_page=100&type=all&sort=updated`
@@ -348,6 +342,15 @@ export const GitHubSection: React.FC = () => {
               Code Distribution
             </Typography>
             {renderLanguageDistribution()}
+          </Paper>
+        </Grid>
+
+        <Grid item xs={12} md={6}>
+          <Paper sx={{ p: 3, height: '100%' }}>
+            <Typography variant="h6" gutterBottom>
+              Domain Focus
+            </Typography>
+            {renderDomainFocus()}
           </Paper>
         </Grid>
 
