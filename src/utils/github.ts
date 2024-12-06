@@ -55,13 +55,3 @@ export const githubFetch = async (url: string) => {
 
   return response;
 };
-
-export const fetchGithubData = async () => {
-  const headers = {
-    Authorization: `Bearer ${GH_TOKEN}`,
-    'Content-Type': 'application/json',
-  };
-  
-  // Use estes headers em suas chamadas fetch
-  // ...
-};
