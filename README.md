@@ -61,22 +61,20 @@ To use the GitHub integration features:
 VITE_GITHUB_TOKEN=your_github_token
 ```
 
-## Personal Images
+## Images
 
-The project uses personal images for the "Beyond Code" section. These images are not included in the repository for privacy reasons.
+The project includes images in the `public/images` directory for the "Beyond Code" section. If you fork this project:
 
-To set up the images:
-
-1. Create an `images` directory in `public`:
+1. Replace the images in `public/images` with your own:
 ```bash
-mkdir -p public/images
+public/images/
+├── 1.jpg  # First showcase image
+├── 2.jpg  # Second showcase image
+└── 3.jpg  # Third showcase image
 ```
 
-2. Add your personal images with the following names:
-- `1.jpg`
-- `2.jpg`
-- `3.jpg`
-
+2. Maintain the same naming convention (1.jpg, 2.jpg, 3.jpg)
+3. Recommended image size: 800x600px or similar aspect ratio
 
 ## 📄 License
 

@@ -15,11 +15,6 @@
 .env.local
 .env.*.local
 
-# Personal Images
-/public/images/*.jpg
-/public/images/*.png
-/public/images/*.jpeg
-
 # Misc
 .DS_Store
 npm-debug.log*
