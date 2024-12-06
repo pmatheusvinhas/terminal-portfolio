@@ -83,7 +83,10 @@ export const Header: React.FC = () => {
             </Typography>
             <Box sx={{ pl: 2 }}>
               <Typography variant="body2" component="div">
-                📍 <span style={{ color: '#03dac6' }}>{resumeData.header.location}</span>
+                📍 <span style={{ color: '#03dac6' }}>Currently in {resumeData.header.location.current}</span>
+              </Typography>
+              <Typography variant="body2" component="div" sx={{ color: 'text.secondary' }}>
+                🏠 Originally from {resumeData.header.location.origin}
               </Typography>
               <Typography variant="body2" component="div">
                 📧 <Link href={`mailto:${resumeData.header.email}`}>{resumeData.header.email}</Link>

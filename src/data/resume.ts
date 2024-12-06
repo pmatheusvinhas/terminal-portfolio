@@ -2,7 +2,10 @@ export const resumeData = {
   header: {
     name: "Paulo Vinhas",
     title: "Senior Software Engineer | Cloud & IoT Specialist",
-    location: "São Paulo, Brazil (UTC-3)",
+    location: {
+      current: "São Paulo, Brazil (UTC-3)",
+      origin: "Rio, Brazil"
+    },
     email: "paulomatheusvinhas@gmail.com",
     github: "https://github.com/pmatheusvinhas",
     summary: `Senior Full Stack Engineer with 5+ years of experience specializing in cloud-native solutions and IoT systems. 
@@ -127,7 +130,7 @@ export const resumeData = {
     cloud: ["Azure", "AWS", "Firebase"],
     devops: ["Git", "Azure DevOps", "GitHub Actions", "Docker", "CI/CD"],
     data: ["MySQL", "PostgreSQL", "CosmosDB", "Real-time Processing"],
-    methodologies: ["Agile", "BDD", "TDD", "Design Thinking"]
+    OS: ["Fedora", "Debian", "Ubuntu", "Windows", "Raspberry Pi OS", "FreeRTOS"]
   },
 
   hobbies: {
