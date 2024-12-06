@@ -47,7 +47,12 @@ const techIcons: Record<string, string> = {
   Ubuntu: 'https://www.vectorlogo.zone/logos/ubuntu/ubuntu-icon.svg',
   Windows: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/windows8/windows8-original.svg',
   'Raspberry Pi OS': 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/raspberrypi/raspberrypi-original.svg',
-  FreeRTOS: 'https://icon.icepanel.io/AWS/svg/Internet-of-Things/FreeRTOS.svg'
+  FreeRTOS: 'https://icon.icepanel.io/AWS/svg/Internet-of-Things/FreeRTOS.svg',
+
+  // AI/ML Platforms
+  OpenAI: 'https://cdn.worldvectorlogo.com/logos/openai-2.svg',
+  Cohere: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3WuRejEdFZztwzqeiU387e9W4Nq0kJ07Uhl6SC6GHzoqJAYoQcxeyvbOreC46chCWz24&usqp=CAU',
+  'Hugging Face': 'https://huggingface.co/front/assets/huggingface_logo-noborder.svg'
 };
 
 interface TechIconProps {

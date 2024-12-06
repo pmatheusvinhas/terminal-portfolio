@@ -8,7 +8,7 @@ export const resumeData = {
     },
     email: "paulomatheusvinhas@gmail.com",
     github: "https://github.com/pmatheusvinhas",
-    summary: `Senior Full Stack Engineer with 5+ years of experience specializing in cloud-native solutions and IoT systems. 
+    summary: `Senior Full Stack Engineer with 6 years of experience specializing in cloud-native solutions and IoT systems. 
     Expert in architecting distributed systems and real-time applications using Azure and AWS. 
     Proven track record of delivering high-impact solutions that process millions of requests daily.`
   },
@@ -61,12 +61,12 @@ export const resumeData = {
       period: "Jan 2024 - Dec 2024",
       location: "Remote",
       description: [
-        "Architected cloud-native sentiment analysis engine with 99.9% uptime for social media monitoring",
-        "Developed web scraping solutions using Selenium for news portals and client websites",
-        "Designed scalable microservices architecture using Azure Functions and FastAPI",
-        "Implemented real-time data processing pipeline integrating multiple social media APIs",
+        "Architected and implemented NLP-powered sentiment analysis platform integrating OpenAI, Cohere, and Hugging Face models",
+        "Achieved 99.9% uptime while processing 1M+ daily social media posts through distributed architecture",
+        "Optimized prompt engineering and model selection to reduce costs by 40% while maintaining 95%+ accuracy",
+        "Designed scalable MLOps pipeline for continuous model evaluation and deployment using Azure Functions"
       ],
-      techStack: ["Python", "FastAPI", "Azure", "React", "MySQL"]
+      techStack: ["Python", "FastAPI", "Azure", "OpenAI", "Cohere", "Hugging Face"]
     },
     {
       title: "Software Engineer",
