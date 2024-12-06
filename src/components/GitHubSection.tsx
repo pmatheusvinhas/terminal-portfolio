@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Paper, Grid, CircularProgress, Chip } from '@mui/material';
 import { motion } from 'framer-motion';
-import { TechIcon } from './TechIcon';
 import { resumeData } from '../data/resume';
 import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, PieChart, Pie, Cell, ResponsiveContainer, Legend, LineChart, CartesianGrid, Line } from 'recharts';
 import { Code, Storage, Cloud, Timeline, Assessment, Speed } from '@mui/icons-material';
@@ -18,6 +17,11 @@ interface Repository {
   created_at: string;
   pushed_at: string;
   size: number;
+  url?: string;
+  primaryLanguage?: {
+    name: string;
+    color: string;
+  };
 }
 
 interface GithubStats {
@@ -55,24 +59,6 @@ const COLORS = [
   '#bb86fc', '#03dac6', '#cf6679', '#018786', 
   '#8bc34a', '#ff9800', '#e91e63', '#607d8b'
 ];
-
-const ACTIVITY_QUERY = `
-  query {
-    user(login: "pmatheusvinhas") {
-      contributionsCollection {
-        contributionCalendar {
-          totalContributions
-          weeks {
-            contributionDays {
-              contributionCount
-              date
-            }
-          }
-        }
-      }
-    }
-  }
-`;
 
 export const GitHubSection: React.FC = () => {
   const [stats, setStats] = useState<GithubStats>({

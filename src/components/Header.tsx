@@ -1,6 +1,5 @@
 import React from 'react';
-import { Box, Typography, Link, Container } from '@mui/material';
-import { motion } from 'framer-motion';
+import { Box, Typography, Link } from '@mui/material';
 import { TypeAnimation } from 'react-type-animation';
 import { AvatarPixel } from './AvatarPixel';
 import { resumeData } from '../data/resume';
