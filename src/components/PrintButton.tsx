@@ -14,7 +14,7 @@ export const PrintButton: React.FC = () => {
         <h1 style="font-size: 24px; margin-bottom: 4px;">${header.name}</h1>
         <p style="font-size: 14px; margin-bottom: 16px;">
           ${header.title}<br/>
-          ${header.location}<br/>
+          ${header.location.current}<br/>
           ${header.email} | ${header.github}
         </p>
         
@@ -64,14 +64,26 @@ export const PrintButton: React.FC = () => {
   const handlePrint = () => {
     const printContent = generatePrintableContent();
     const opt = {
-      margin: 15,
+      margin: [15, 15, 0, 15],
       filename: 'paulo-vinhas-cv.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      jsPDF: { 
+        unit: 'mm', 
+        format: 'a4', 
+        orientation: 'portrait',
+        putOnlyUsedFonts: true,
+        floatPrecision: 16
+      },
+      pagebreak: { mode: 'avoid-all' },
+      output: 'datauristring'
     };
 
-    html2pdf().set(opt).from(printContent).save();
+    html2pdf()
+      .set(opt)
+      .from(printContent)
+      .toPdf()
+      .output('save', 'paulo-vinhas-cv.pdf');
   };
 
   return (
