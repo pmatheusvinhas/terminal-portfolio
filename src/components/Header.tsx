@@ -3,6 +3,7 @@ import { Box, Typography, Link } from '@mui/material';
 import { TypeAnimation } from 'react-type-animation';
 import { AvatarPixel } from './AvatarPixel';
 import { resumeData } from '../data/resume';
+import { TimeDisplay } from './TimeDisplay';
 
 export const Header: React.FC = () => {
   return (
@@ -82,8 +83,9 @@ export const Header: React.FC = () => {
               <span style={{ color: '#bb86fc' }}>$ cat</span> contact.txt
             </Typography>
             <Box sx={{ pl: 2 }}>
-              <Typography variant="body2" component="div">
-                📍 <span style={{ color: '#03dac6' }}>Currently in {resumeData.header.location.current}</span>
+              <Typography variant="body2" component="div" sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                📍 <span style={{ color: '#03dac6' }}>Currently in São Paulo, Brazil</span>
+                <TimeDisplay />
               </Typography>
               <Typography variant="body2" component="div" sx={{ color: 'text.secondary' }}>
                 🏠 Originally from {resumeData.header.location.origin}

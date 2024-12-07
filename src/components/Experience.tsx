@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import { TechIcon } from './TechIcon';
 import { resumeData } from '../data/resume';
+import { ExpandedExperience } from './ExpandedExperience';
 
 export const Experience: React.FC = () => {
+  const [expandedStates, setExpandedStates] = useState<{
+    [key: string]: { architecture: boolean; metrics: boolean };
+  }>({});
+
+  const handleToggleArchitecture = (index: number) => {
+    setExpandedStates((prev) => ({
+      ...prev,
+      [index]: {
+        ...prev[index],
+        architecture: !prev[index]?.architecture
+      }
+    }));
+  };
+
+  const handleToggleMetrics = (index: number) => {
+    setExpandedStates((prev) => ({
+      ...prev,
+      [index]: {
+        ...prev[index],
+        metrics: !prev[index]?.metrics
+      }
+    }));
+  };
+
   return (
     <Box component={motion.div}
       initial={{ opacity: 0 }}
@@ -91,6 +116,16 @@ export const Experience: React.FC = () => {
                 <TechIcon key={tech} tech={tech} />
               ))}
             </Box>
+
+            {exp.expanded && (
+              <ExpandedExperience
+                expanded={exp.expanded}
+                showArchitecture={expandedStates[index]?.architecture || false}
+                showMetrics={expandedStates[index]?.metrics || false}
+                onToggleArchitecture={() => handleToggleArchitecture(index)}
+                onToggleMetrics={() => handleToggleMetrics(index)}
+              />
+            )}
           </Paper>
         ))}
       </Box>

@@ -5,6 +5,7 @@ export interface Experience {
   location: string;
   description: string[];
   techStack: string[];
+  expanded?: ExpandedExperience;
 }
 
 export interface Project {
@@ -58,4 +59,37 @@ export interface ProjectDetails extends Project {
     performance?: number;
   };
   status: 'completed' | 'in-progress' | 'archived';
+}
+
+interface ArchitectureComponent {
+  name: string;
+  description: string;
+  techDetails: string;
+}
+
+interface TechnicalChallenge {
+  problem: string;
+  solution: string;
+  outcome: string;
+}
+
+interface MetricItem {
+  metric: string;
+  value: string;
+  context?: string;
+  growth?: string;
+}
+
+interface ExpandedExperience {
+  architecture: {
+    overview: string;
+    diagramUrl?: string;
+    components: ArchitectureComponent[];
+    challenges: TechnicalChallenge[];
+  };
+  metrics: {
+    business: MetricItem[];
+    technical: MetricItem[];
+    scale: MetricItem[];
+  };
 } 
