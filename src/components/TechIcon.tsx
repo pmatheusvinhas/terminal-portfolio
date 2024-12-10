@@ -36,6 +36,7 @@ const techIcons: Record<string, string> = {
   MySQL: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
   MongoDB: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
   CosmosDB: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg',
+  Redis: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg',
 
   // IoT & Protocols
   MQTT: 'https://raw.githubusercontent.com/mqtt/mqttorg-graphics/a8eafc36d74023fb1fadcc2e82d353189071f2dd/svg/mqtt-icon-solid.svg',

@@ -1,89 +1,121 @@
 import React from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Print } from '@mui/icons-material';
-import html2pdf from 'html2pdf.js';
+import { jsPDF } from 'jspdf';
 import { resumeData } from '../data/resume';
 
 export const PrintButton: React.FC = () => {
-  const generatePrintableContent = () => {
-    const content = document.createElement('div');
-    const { header, education, experience, skills, certifications } = resumeData;
-
-    content.innerHTML = `
-      <div style="font-family: Arial, sans-serif; color: black; line-height: 1.6;">
-        <h1 style="font-size: 24px; margin-bottom: 4px;">${header.name}</h1>
-        <p style="font-size: 14px; margin-bottom: 16px;">
-          ${header.title}<br/>
-          ${header.location.current}<br/>
-          ${header.email} | ${header.github}
-        </p>
-        
-        <h2 style="font-size: 18px; margin-top: 24px;">Professional Summary</h2>
-        <p style="font-size: 12px;">${header.summary}</p>
-
-        <h2 style="font-size: 18px; margin-top: 24px;">Experience</h2>
-        ${experience.map(exp => `
-          <div style="margin-bottom: 16px;">
-            <h3 style="font-size: 14px; margin-bottom: 4px;">${exp.title} | ${exp.company}</h3>
-            <p style="font-size: 12px; margin: 0;">${exp.period} | ${exp.location}</p>
-            <ul style="font-size: 12px; margin-top: 4px;">
-              ${exp.description.map(desc => `<li>${desc}</li>`).join('')}
-            </ul>
-            <p style="font-size: 12px; margin: 4px 0;">Technologies: ${exp.techStack.join(', ')}</p>
-          </div>
-        `).join('')}
-
-        <h2 style="font-size: 18px; margin-top: 24px;">Education</h2>
-        ${education.map(edu => `
-          <div style="margin-bottom: 8px;">
-            <h3 style="font-size: 14px; margin-bottom: 2px;">${edu.degree}</h3>
-            <p style="font-size: 12px; margin: 0;">${edu.institution} | ${edu.period}</p>
-          </div>
-        `).join('')}
-
-        <h2 style="font-size: 18px; margin-top: 24px;">Skills</h2>
-        ${Object.entries(skills).map(([category, items]) => `
-          <div style="margin-bottom: 8px;">
-            <h3 style="font-size: 14px; margin-bottom: 2px;">${category.charAt(0).toUpperCase() + category.slice(1)}</h3>
-            <p style="font-size: 12px; margin: 0;">${items.join(', ')}</p>
-          </div>
-        `).join('')}
-
-        <h2 style="font-size: 18px; margin-top: 24px;">Certifications</h2>
-        ${certifications.map(cert => `
-          <div style="margin-bottom: 4px;">
-            <p style="font-size: 12px; margin: 0;">${cert.name} - ${cert.issuer} (${cert.year})</p>
-          </div>
-        `).join('')}
-      </div>
-    `;
-
-    return content;
-  };
-
   const handlePrint = () => {
-    const printContent = generatePrintableContent();
-    const opt = {
-      margin: [15, 15, 0, 15],
-      filename: 'paulo-vinhas-cv.pdf',
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2 },
-      jsPDF: { 
-        unit: 'mm', 
-        format: 'a4', 
-        orientation: 'portrait',
-        putOnlyUsedFonts: true,
-        floatPrecision: 16
-      },
-      pagebreak: { mode: 'avoid-all' },
-      output: 'datauristring'
+    const doc = new jsPDF();
+    const { header, education, experience, skills, certifications } = resumeData;
+    const margin = 20;
+    let y = margin;
+
+    const addSection = (title: string, content: string) => {
+      y += 10;
+      doc.setFontSize(16);
+      doc.text(title, margin, y);
+      y += 8;
+      doc.setFontSize(12);
+      const lines = doc.splitTextToSize(content, doc.internal.pageSize.width - 2 * margin);
+      doc.text(lines, margin, y);
+      y += lines.length * 7;
     };
 
-    html2pdf()
-      .set(opt)
-      .from(printContent)
-      .toPdf()
-      .output('save', 'paulo-vinhas-cv.pdf');
+    // Header usando dados do resume.ts
+    doc.setFontSize(24);
+    doc.text(header.name, margin, y);
+    y += 10;
+    doc.setFontSize(12);
+    doc.text([
+      header.title,
+      `Location: ${header.location.current}`,
+      `Contact: ${header.email}`,
+      `GitHub: ${header.github}`
+    ], margin, y);
+    y += 20;
+
+    // Summary do resume.ts
+    addSection('PROFESSIONAL SUMMARY', header.summary);
+
+    // Skills do resume.ts
+    addSection('TECHNICAL EXPERTISE',
+      Object.entries(skills)
+        .map(([category, items]) => `${category}: ${items.join(' | ')}`)
+        .join('\n')
+    );
+
+    // Experience do resume.ts com métricas
+    y += 10;
+    doc.setFontSize(16);
+    doc.text('PROFESSIONAL EXPERIENCE', margin, y);
+    y += 10;
+
+    experience.forEach(exp => {
+      if (y > doc.internal.pageSize.height - 50) {
+        doc.addPage();
+        y = margin;
+      }
+
+      // Título e período
+      doc.setFontSize(14);
+      doc.text(`${exp.title} | ${exp.company}`, margin, y);
+      y += 7;
+      doc.setFontSize(12);
+      doc.text(`${exp.period} | ${exp.location}`, margin, y);
+      y += 7;
+
+      // Achievements com métricas
+      if (exp.expanded?.metrics) {
+        const achievements = Object.entries(exp.expanded.metrics)
+          .flatMap(([category, items]) => 
+            items.map(item => `• ${item.metric}: ${item.value} ${item.context ? `(${item.context})` : ''}`)
+          );
+        
+        achievements.forEach(achievement => {
+          const lines = doc.splitTextToSize(achievement, doc.internal.pageSize.width - 2 * margin);
+          doc.text(lines, margin, y);
+          y += lines.length * 7;
+        });
+      }
+
+      // Responsabilidades principais
+      exp.description.forEach(desc => {
+        const lines = doc.splitTextToSize(`• ${desc}`, doc.internal.pageSize.width - 2 * margin);
+        doc.text(lines, margin, y);
+        y += lines.length * 7;
+      });
+
+      // Tech Stack
+      doc.text(`Technical Environment: ${exp.techStack.join(' | ')}`, margin, y);
+      y += 10;
+    });
+
+    // Education - Mantendo relevante e conciso
+    if (y > doc.internal.pageSize.height - 50) {
+      doc.addPage();
+      y = margin;
+    }
+
+    addSection('EDUCATION',
+      education.map(edu => 
+        `${edu.degree}\n${edu.institution} (${edu.period})`
+      ).join('\n\n')
+    );
+
+    // Certifications - Destacando desenvolvimento contínuo
+    if (y > doc.internal.pageSize.height - 50) {
+      doc.addPage();
+      y = margin;
+    }
+
+    addSection('PROFESSIONAL CERTIFICATIONS',
+      certifications.map(cert => 
+        `${cert.name} - ${cert.issuer} (${cert.year})`
+      ).join('\n')
+    );
+
+    doc.save('paulo-vinhas-cv.pdf');
   };
 
   return (

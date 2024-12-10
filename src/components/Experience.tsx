@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Typography, Paper, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { TechIcon } from './TechIcon';
 import { resumeData } from '../data/resume';
 import { ExpandedExperience } from './ExpandedExperience';
+import { Architecture, Analytics } from '@mui/icons-material';
 
 export const Experience: React.FC = () => {
   const [expandedStates, setExpandedStates] = useState<{
@@ -120,10 +121,12 @@ export const Experience: React.FC = () => {
             {exp.expanded && (
               <ExpandedExperience
                 expanded={exp.expanded}
+                company={exp.company}
                 showArchitecture={expandedStates[index]?.architecture || false}
                 showMetrics={expandedStates[index]?.metrics || false}
                 onToggleArchitecture={() => handleToggleArchitecture(index)}
                 onToggleMetrics={() => handleToggleMetrics(index)}
+                showDiagrams={exp.expandedFeatures?.showDiagrams}
               />
             )}
           </Paper>

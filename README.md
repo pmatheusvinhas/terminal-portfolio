@@ -7,9 +7,24 @@ A modern portfolio website with a retro terminal theme, built using React, TypeS
 - 🌙 Dark mode optimized design
 - 📊 Real-time GitHub statistics and analytics
 - 💾 Interactive tech stack visualization
-- 🖨️ Print-friendly resume version
+- 🖨️ ATS-Optimized Resume Export
 - 📱 Fully responsive layout
 - ⚡ Fast and optimized performance
+
+## 🎯 ATS Optimization
+
+This template is designed to be ATS (Applicant Tracking System) friendly:
+
+1. **Structured Data**: All resume data is centralized in `src/data/resume.ts` following ATS-friendly patterns
+2. **Keyword Optimization**: Skills and experiences are organized to maximize ATS parsing
+3. **Clean Export**: PDF generation with selectable text and clear hierarchy
+4. **Consistent Formatting**: Standardized sections and bullet points
+5. **Metrics Focus**: Easy to highlight quantifiable achievements
+
+### Resume Export Options
+- **Web View**: Interactive portfolio with expanded details
+- **ATS PDF**: Clean, parseable format optimized for ATS
+- **Print Version**: Printer-friendly layout
 
 ## 🛠️ Built With
 
@@ -113,3 +128,56 @@ If you found this project helpful, consider:
 - Giving it a star ⭐
 - Following the [author](https://github.com/pmatheusvinhas) on GitHub
 - Sharing it with others who might find it useful
+
+## Customizing Diagrams
+
+The portfolio includes several architecture diagrams that you can customize:
+
+1. Check `/public/diagrams/examples/` for reference diagrams
+2. Use `/public/diagrams/templates/` as starting points
+3. Follow the guidelines in `src/config/diagrams.ts`
+4. Replace the diagrams in `/public/diagrams/` with your own
+
+### Diagram Requirements:
+- Follow recommended dimensions for consistent display
+- Maintain similar information hierarchy
+- Use clear and professional visual style
+- Include all key components and flows
+
+See individual diagram guidelines for specific recommendations.
+
+## Customizing Experiences
+
+Each experience in your portfolio can be customized with different levels of detail:
+
+### Expandable Features
+You can enable/disable different aspects for each experience:
+```typescript
+expandedFeatures: {
+  showArchitecture: boolean;  // Show technical architecture details
+  showMetrics: boolean;       // Show impact metrics
+  showDiagrams: boolean;      // Show architecture diagrams
+}
+```
+
+### Example Configuration:
+```typescript
+{
+  title: "Software Engineer",
+  company: "Example Corp",
+  // ... basic info ...
+  expandedFeatures: {
+    showArchitecture: true,   // Enable architecture section
+    showMetrics: true,        // Enable metrics section
+    showDiagrams: false       // Disable diagrams
+  },
+  expanded: {
+    // ... detailed content ...
+  }
+}
+```
+
+This allows you to:
+- Show only relevant information for each experience
+- Keep simpler experiences concise
+- Highlight complex projects with full details

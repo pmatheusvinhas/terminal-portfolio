@@ -1,3 +1,17 @@
+import testingStationDiagram from '/diagrams/wow-testing-station.png'
+import diagnosticFlowDiagram from '/diagrams/wow-diagnostic-flow.png'
+
+const basePath = import.meta.env.BASE_URL
+
+/**
+ * Resume data structure optimized for both web display and ATS parsing.
+ * 
+ * Key considerations for ATS:
+ * - Use consistent formatting
+ * - Include relevant keywords
+ * - Quantify achievements
+ * - Maintain clear hierarchy
+ */
 export const resumeData = {
   header: {
     name: "Paulo Vinhas",
@@ -26,7 +40,7 @@ export const resumeData = {
     },
     {
       degree: "Technical Degree in Electronics",
-      institution: "ETEC Getúlio Vargas (State Technical School)",
+      institution: "São Paulo State Technical School",
       period: "2011-2012"
     }
   ],
@@ -58,59 +72,94 @@ export const resumeData = {
     {
       title: "Co-Founder & Principal Software Engineer",
       company: "Vinbol",
-      period: "Jan 2024 - Dec 2024",
+      period: "Jan 2024 - Present",
       location: "Remote",
       description: [
-        "Architected and implemented NLP-powered sentiment analysis platform",
-        "Achieved 99.9% uptime while processing 1M+ daily social media posts",
-        "Optimized prompt engineering and model selection to reduce costs by 40%"
+        "Architected MVP for sentiment analysis combining multiple LLM providers (OpenAI, Cohere, Hugging Face)",
+        "Developed prompt engineering framework reducing token usage by 40% while maintaining 95% accuracy",
+        "Designed scalable architecture handling 100k+ daily requests with adaptive load balancing"
       ],
       techStack: ["Python", "FastAPI", "Azure", "OpenAI", "Cohere", "Hugging Face"],
+      expandedFeatures: {
+        showArchitecture: true,
+        showMetrics: true,
+        showDiagrams: true
+      },
       expanded: {
         architecture: {
-          overview: "Distributed system processing millions of social media posts daily through a multi-stage NLP pipeline",
-          diagramUrl: "/diagrams/vinbol-arch.svg",
+          overview: "Multi-model NLP platform leveraging different LLM providers for optimal cost-performance ratio, featuring intelligent prompt management and adaptive load distribution",
+          diagrams: [
+            {
+              title: "AI Platform Architecture",
+              description: "Multi-provider NLP system with adaptive routing",
+              imageUrl: `${basePath}diagrams/vinbol-arch.png`
+            }
+          ],
           components: [
             {
-              name: "Data Ingestion Layer",
-              description: "Scalable pipeline using Azure Event Hubs",
-              techDetails: "Python, Azure Functions, Event Hubs"
+              name: "Model Router",
+              description: "Intelligent routing between different LLM providers",
+              techDetails: "Python, FastAPI, Custom Routing Logic"
             },
             {
-              name: "NLP Processing Pipeline",
-              description: "Multi-model sentiment analysis system",
-              techDetails: "OpenAI GPT-4, Cohere Classify, Custom BERT models"
+              name: "Prompt Management",
+              description: "Dynamic prompt optimization system",
+              techDetails: "Token Analysis, Context Management, Caching"
+            },
+            {
+              name: "Load Balancer",
+              description: "Cost and performance-aware request distribution",
+              techDetails: "Azure Functions, Queue Management"
             }
           ],
           challenges: [
             {
-              problem: "Handling spikes of 100k+ concurrent requests",
-              solution: "Implemented adaptive throttling with Azure Functions",
-              outcome: "Maintained 99.9% uptime during peak loads"
+              problem: "High costs of LLM API calls",
+              solution: "Developed dynamic prompt optimization and caching",
+              outcome: "40% cost reduction while maintaining accuracy"
+            },
+            {
+              problem: "Varying provider performance",
+              solution: "Implemented adaptive model routing",
+              outcome: "95% accuracy with optimal cost-performance balance"
             }
           ]
         },
         metrics: {
           business: [
             {
-              metric: "Cost Reduction",
-              value: "40%",
-              context: "Through optimized prompt engineering"
+              metric: "Cost Efficiency",
+              value: "-40%",
+              context: "Token usage reduction",
+              growth: "Through prompt optimization"
+            },
+            {
+              metric: "Analysis Cost",
+              value: "$0.002",
+              context: "Per text analysis",
+              growth: "From $0.005 initial cost"
             }
           ],
           technical: [
             {
-              metric: "System Reliability",
-              value: "99.9%",
-              context: "Up from 98.5% baseline"
+              metric: "Accuracy",
+              value: "95%",
+              context: "Sentiment analysis precision",
+              growth: "Across all providers"
+            },
+            {
+              metric: "Response Time",
+              value: "850ms",
+              context: "Average analysis time",
+              growth: "Including routing overhead"
             }
           ],
           scale: [
             {
-              metric: "Daily Processing",
-              value: "1M+",
-              context: "Social media posts",
-              growth: "10x in 6 months"
+              metric: "Daily Volume",
+              value: "100k+",
+              context: "Texts analyzed",
+              growth: "With adaptive scaling"
             }
           ]
         }
@@ -122,77 +171,91 @@ export const resumeData = {
       period: "Jun 2021 - Dec 2023",
       location: "São Paulo, Brazil",
       description: [
-        "Desenvolveu plataforma de distribuição de dados empresariais",
-        "Implementou integrações de dados para múltiplas unidades",
-        "Criou sistema de monitoramento em tempo real"
+        "Led development of globally distributed data integration layer connecting enterprise systems across Brazil, Uruguay, Austria, and USA",
+        "Architected high-performance API gateway with Redis-based geo-replicated caching achieving sub-100ms response times",
+        "Reduced M&A system integration timeline from 12 to 3 months through standardized Delta Lake access protocols"
       ],
-      techStack: ["Python", "FastAPI", "Flask", "PostgreSQL", "Docker", "Azure"],
+      techStack: ["Python", "FastAPI", "Azure", "Delta Lake", "Redis", "Docker"],
+      expandedFeatures: {
+        showArchitecture: true,
+        showMetrics: true,
+        showDiagrams: true
+      },
       expanded: {
         architecture: {
-          overview: "Plataforma distribuída de integração de dados empresariais com processamento em tempo real",
-          diagramUrl: "/diagrams/nitro-arch.svg",
+          overview: "Globally distributed data integration platform leveraging Redis geo-replication and Delta Lake protocols to enable standardized data access across international operations, facilitating rapid M&A integrations and real-time data synchronization",
+          diagrams: [
+            {
+              title: "Enterprise Data Platform",
+              description: "Integration architecture with geo-distributed caching",
+              imageUrl: `${basePath}diagrams/nitro_architecture.png`
+            }
+          ],
           components: [
             {
               name: "API Gateway Layer",
-              description: "Gateway centralizado para todas as APIs da empresa",
-              techDetails: "FastAPI, Azure API Management, JWT Auth"
+              description: "Globally distributed access point with geo-replicated caching",
+              techDetails: "Azure API Management, Redis Premium, FastAPI"
             },
             {
-              name: "Data Integration Pipeline",
-              description: "Sistema de ETL para múltiplas fontes de dados",
-              techDetails: "Apache Airflow, Azure Data Factory, PostgreSQL"
+              name: "Data Access Layer",
+              description: "Standardized protocols for enterprise data access",
+              techDetails: "Delta Sharing, REST APIs, Event Grid Topics"
             },
             {
-              name: "Real-time Monitoring",
-              description: "Dashboard em tempo real para métricas críticas",
-              techDetails: "Flask, WebSockets, Azure Event Hub"
+              name: "Regional Services",
+              description: "Region-specific data synchronization with local caching",
+              techDetails: "Redis Geo-replication, Event Grid Topics, Regional Failover"
             }
           ],
           challenges: [
             {
-              problem: "Integração com sistemas legados sem APIs",
-              solution: "Desenvolvimento de adaptadores personalizados e sistema de filas",
-              outcome: "Redução de 70% no tempo de integração de novos sistemas"
+              problem: "High latency in cross-region data access",
+              solution: "Implemented Redis geo-replicated caching strategy",
+              outcome: "Achieved consistent sub-100ms response times across all regions"
             },
             {
-              problem: "Alta latência em consultas complexas",
-              solution: "Implementação de cache distribuído e otimização de queries",
-              outcome: "Redução de 90% no tempo de resposta médio"
+              problem: "Complex M&A data integration process (12 months)",
+              solution: "Developed standardized Delta Lake access protocols",
+              outcome: "Reduced integration timeline to 3 months with consistent patterns"
             }
           ]
         },
         metrics: {
           business: [
             {
-              metric: "Tempo de Integração",
-              value: "-70%",
-              context: "Redução no tempo de integração de sistemas"
+              metric: "Integration Time",
+              value: "-75%",
+              context: "M&A system integration timeline",
+              growth: "From 12 months to 3 months"
             },
             {
-              metric: "Produtividade",
-              value: "+45%",
-              context: "Aumento na eficiência das equipes"
+              metric: "Global Coverage",
+              value: "4",
+              context: "Regions with local caching",
+              growth: "Brazil, Uruguay, Austria, USA"
             }
           ],
           technical: [
             {
-              metric: "Latência",
+              metric: "Response Time",
               value: "50ms",
-              context: "Tempo médio de resposta das APIs",
-              growth: "90% mais rápido"
+              context: "Average global API response",
+              growth: "With geo-replicated caching"
             },
             {
-              metric: "Disponibilidade",
-              value: "99.95%",
-              context: "Uptime do sistema em 2023"
+              metric: "Cache Hit Rate",
+              value: "95%",
+              context: "Global cache efficiency",
+              growth: "Reducing backend load"
             }
           ],
           scale: [
             {
-              metric: "Requisições",
-              value: "500k",
-              context: "Requisições diárias",
-              growth: "5x em 12 meses"
+              metric: "Daily Operations",
+              value: "500k+",
+              context: "API requests handled",
+              growth: "With 99.9% availability"
             }
           ]
         }
@@ -204,72 +267,89 @@ export const resumeData = {
       period: "Dec 2020 - Jul 2021",
       location: "São Paulo, Brazil",
       description: [
-        "Modernizou software legado de análise de vibração",
-        "Implementou pipeline de dados IoT na nuvem",
-        "Melhorou confiabilidade através de práticas BDD"
+        "Modernized legacy vibration analysis system through complete redesign from Windows Embedded to Raspberry Pi OS",
+        "Implemented real-time signal processing and FFT analysis in C/C++ with GSL library",
+        "Eliminated 8 years of technical debt while reducing development costs by 65%"
       ],
-      techStack: ["Python", "AWS", "IoT", "C#", "Node.js"],
+      techStack: ["C/C++", "Python", "Raspberry Pi OS", "FFT", "AWS"],
+      expandedFeatures: {
+        showArchitecture: true,
+        showMetrics: true,
+        showDiagrams: true
+      },
       expanded: {
         architecture: {
-          overview: "Sistema distribuído para análise de vibração industrial com processamento em nuvem",
-          diagramUrl: "/diagrams/hottec-arch.svg",
+          overview: "Modern vibration analysis system built on UNIX architecture, featuring real-time signal processing and FFT analysis, with cloud integration capabilities",
+          diagrams: [
+            {
+              title: "System Architecture",
+              description: "Core system components and data flow",
+              imageUrl: `${basePath}diagrams/hottec_architecture.png`
+            }
+          ],
           components: [
             {
-              name: "Legacy Integration Layer",
-              description: "Interface com drivers C# existentes",
-              techDetails: "C#, .NET Core, Message Queue"
+              name: "Data Acquisition System",
+              description: "High-performance vibration data collection with real-time processing",
+              techDetails: "C++, Real-time Extensions, SPI/I2C Interfaces"
             },
             {
-              name: "Cloud Processing Pipeline",
-              description: "Processamento de dados de sensores IoT",
-              techDetails: "AWS IoT Core, Lambda, DynamoDB"
+              name: "Signal Processing Engine",
+              description: "Advanced FFT and vibration analysis implementation",
+              techDetails: "C++, GSL Library, Custom DSP Algorithms"
             },
             {
-              name: "Real-time Analytics",
-              description: "Análise em tempo real de padrões de vibração",
-              techDetails: "Python, NumPy, AWS Kinesis"
+              name: "System Services",
+              description: "Scheduling and monitoring daemons with hardware abstraction",
+              techDetails: "C, POSIX APIs, Hardware Abstraction Layer"
             }
           ],
           challenges: [
             {
-              problem: "8 anos de dívida técnica",
-              solution: "Refatoração gradual com testes automatizados",
-              outcome: "Modernização completa em 8 meses mantendo compatibilidade"
+              problem: "Legacy Windows Embedded system with 8 years of technical debt",
+              solution: "Redesigned system using modern UNIX architecture and C/C++",
+              outcome: "Successful migration in 8 months with enhanced performance"
             },
             {
-              problem: "Perda de dados em picos de vibração",
-              solution: "Buffer local e sincronização resiliente",
-              outcome: "Zero perda de dados críticos"
+              problem: "Knowledge transfer taking 6+ months for new developers",
+              solution: "Implemented clean architecture with comprehensive documentation",
+              outcome: "Reduced onboarding time to 1 month for new team members"
             }
           ]
         },
         metrics: {
           business: [
             {
-              metric: "ROI Cliente",
-              value: "3x",
-              context: "Retorno sobre investimento em manutenção"
+              metric: "Development Cost",
+              value: "-65%",
+              context: "Reduction in development and maintenance costs"
+            },
+            {
+              metric: "Time to Market",
+              value: "-75%",
+              context: "For new feature implementation"
             }
           ],
           technical: [
             {
-              metric: "Cobertura",
-              value: "95%",
-              context: "Cobertura de testes",
-              growth: "De 20% para 95%"
+              metric: "Code Base",
+              value: "-40%",
+              context: "Reduction in codebase size",
+              growth: "With improved functionality"
             },
             {
-              metric: "Precisão",
-              value: "99.9%",
-              context: "Na detecç��o de falhas"
+              metric: "Knowledge Transfer",
+              value: "83%",
+              context: "Reduction in onboarding time",
+              growth: "From 6 months to 1 month"
             }
           ],
           scale: [
             {
-              metric: "Sensores",
-              value: "2k+",
-              context: "Dispositivos monitorados",
-              growth: "2x em 6 meses"
+              metric: "Processing",
+              value: "2x",
+              context: "Increase in processing capability",
+              growth: "Same hardware resources"
             }
           ]
         }
@@ -281,71 +361,93 @@ export const resumeData = {
       period: "Mar 2020 - Nov 2020",
       location: "São Paulo, Brazil",
       description: [
-        "Desenvolveu plataforma IoT para automação residencial",
-        "Criou app mobile para controle remoto",
-        "Implementou sistema de comunicação MQTT"
+        "Engineered automated testing station reducing device validation time by 87%",
+        "Developed lightweight diagnostic web interface for ESP8266-based IoT devices",
+        "Designed future-proof architecture for testing and monitoring infrastructure"
       ],
-      techStack: ["React Native", "Node.js", "AWS", "IoT", "MQTT"],
+      techStack: ["Python", "C++", "ESP8266", "HTML/CSS", "PyTest"],
+      expandedFeatures: {
+        showArchitecture: true,
+        showMetrics: true,
+        showDiagrams: true
+      },
       expanded: {
         architecture: {
-          overview: "Plataforma IoT para automação residencial com controle em tempo real",
-          diagramUrl: "/diagrams/wow-arch.svg",
+          overview: "Two-phase IoT quality assurance solution: automated testing station for distribution and embedded diagnostic system for field support",
+          diagrams: [
+            {
+              title: "Automated Testing Station",
+              description: "Hardware/software infrastructure for device validation",
+              imageUrl: `${basePath}diagrams/wow-testing-station.png`
+            },
+            {
+              title: "Device Diagnostic Flow",
+              description: "Embedded diagnostic system and support workflow",
+              imageUrl: `${basePath}diagrams/wow-diagnostic-flow.png`
+            }
+          ],
           components: [
             {
-              name: "Mobile App",
-              description: "Interface de controle para usuários",
-              techDetails: "React Native, Redux, Push Notifications"
+              name: "Automated Testing Station",
+              description: "Hardware/software solution for device validation before distribution",
+              techDetails: "Python, PyTest, PySerial, Custom Testing Hardware"
             },
             {
-              name: "IoT Control Layer",
-              description: "Gerenciamento de dispositivos smart home",
-              techDetails: "AWS IoT Core, MQTT, Node.js"
+              name: "Embedded Diagnostic System",
+              description: "Lightweight web server embedded in IoT devices",
+              techDetails: "C++, ESP8266 WebServer, Minified HTML/CSS (~32KB)"
             },
             {
-              name: "Automation Engine",
-              description: "Motor de regras para automação",
-              techDetails: "Node.js, Redis, AWS Lambda"
+              name: "Future Integration Design",
+              description: "Architecture planning for cloud integration",
+              techDetails: "System Design Documentation, API Specifications"
             }
           ],
           challenges: [
             {
-              problem: "Latência em controles críticos",
-              solution: "Implementação de conexão MQTT otimizada",
-              outcome: "Tempo de resposta < 100ms para comandos críticos"
+              problem: "Limited flash memory on ESP8266",
+              solution: "Optimized web interface with minimal dependencies",
+              outcome: "Complete diagnostic interface under 32KB"
             },
             {
-              problem: "Consumo de bateria em dispositivos",
-              solution: "Protocolo de sono profundo customizado",
-              outcome: "Aumento de 300% na duração da bateria"
+              problem: "Complex manual testing process",
+              solution: "Custom testing station with automated validation",
+              outcome: "Reduced testing time from 15 minutes to 2 minutes per device"
             }
           ]
         },
         metrics: {
           business: [
             {
-              metric: "Economia",
-              value: "30%",
-              context: "Redução média no consumo de energia"
+              metric: "Testing Efficiency",
+              value: "87%",
+              context: "Reduction in device validation time"
+            },
+            {
+              metric: "Support Process",
+              value: "60%",
+              context: "Faster issue diagnosis through embedded interface"
             }
           ],
           technical: [
             {
-              metric: "Latência",
-              value: "100ms",
-              context: "Tempo de resposta dos comandos"
+              metric: "Web Server Size",
+              value: "32KB",
+              context: "Optimized embedded diagnostic interface",
+              growth: "From 128KB initial size"
             },
             {
-              metric: "Bateria",
-              value: "+300%",
-              context: "Aumento na duração"
+              metric: "Test Coverage",
+              value: "100%",
+              context: "Device functionality verification"
             }
           ],
           scale: [
             {
-              metric: "Devices",
+              metric: "Devices Tested",
               value: "5k+",
-              context: "Dispositivos conectados",
-              growth: "3x em 8 meses"
+              context: "Through automated testing station",
+              growth: "240 devices/day capacity"
             }
           ]
         }
@@ -357,72 +459,91 @@ export const resumeData = {
       period: "Jan 2019 - Feb 2020",
       location: "São Paulo, Brazil",
       description: [
-        "Desenvolveu firmware embarcado para automação industrial",
-        "Criou dashboard para monitoramento em tempo real",
-        "Implementou sistema de manutenção preditiva"
+        "Led parallel MVP development of educational robotics and precision agriculture solutions",
+        "Implemented Google's Blockly visual programming for both robotics education and farming automation",
+        "Engineered embedded control systems for robot arm and precision CNC farming equipment"
       ],
-      techStack: ["Python", "React", "C++", "IoT", "MQTT"],
+      techStack: ["C++", "Python", "React", "Google Blockly", "STM32", "MQTT"],
+      expandedFeatures: {
+        showArchitecture: true,
+        showMetrics: true,
+        showDiagrams: true
+      },
       expanded: {
         architecture: {
-          overview: "Sistema embarcado para automação industrial com monitoramento em tempo real e manutenção preditiva",
-          diagramUrl: "/diagrams/osm-arch.svg",
+          overview: "Dual MVP development featuring Google's Blockly visual programming language: a STEM education robot arm and a precision farming CNC system, both focused on making complex automation accessible to non-technical users",
+          diagrams: [
+            {
+              title: "Product Architecture",
+              description: "Educational robotics and precision farming systems",
+              imageUrl: `${basePath}diagrams/osm_architecture.png`
+            }
+          ],
           components: [
             {
-              name: "Embedded Control System",
-              description: "Firmware para controle de equipamentos industriais",
-              techDetails: "C++, FreeRTOS, STM32"
+              name: "Educational Robot MVP",
+              description: "STEM-focused robot arm with visual programming interface",
+              techDetails: "C++, STM32, Google Blockly, React, Python Interpreter"
             },
             {
-              name: "Real-time Dashboard",
-              description: "Interface web para monitoramento em tempo real",
-              techDetails: "React, WebSocket, D3.js"
+              name: "Precision Farming MVP",
+              description: "Agricultural CNC system with crop planning interface",
+              techDetails: "C++, ATMega, Google Blockly, MQTT, Position Control"
             },
             {
-              name: "Predictive Maintenance",
-              description: "Sistema de análise preditiva de falhas",
-              techDetails: "Python, scikit-learn, Time Series Analysis"
+              name: "Visual Programming Layer",
+              description: "Custom Blockly implementations for both systems",
+              techDetails: "Google Blockly, JavaScript, Custom Block Definitions"
             }
           ],
           challenges: [
             {
-              problem: "Restrições de hardware limitado",
-              solution: "Otimização de memória e implementação de buffer circular",
-              outcome: "Redução de 60% no uso de memória"
+              problem: "Making robotics accessible to 8-12 year olds",
+              solution: "Developed custom Blockly blocks for intuitive motion control",
+              outcome: "Successfully tested with 20+ students in pilot program"
             },
             {
-              problem: "Comunicação em ambiente industrial",
-              solution: "Protocolo customizado com retry inteligente",
-              outcome: "99.99% de confiabilidade na transmissão"
+              problem: "Complex agricultural planning requirements",
+              solution: "Created specialized Blockly toolset for farming patterns",
+              outcome: "Enabled farmers to program planting sequences without coding"
             }
           ]
         },
         metrics: {
           business: [
             {
-              metric: "Tempo de Parada",
-              value: "-45%",
-              context: "Redução em paradas não programadas"
+              metric: "Education MVP",
+              value: "20+",
+              context: "Students in pilot program",
+              growth: "100% completion rate"
+            },
+            {
+              metric: "Farming MVP",
+              value: "5",
+              context: "Crop patterns automated",
+              growth: "From manual planning"
             }
           ],
           technical: [
             {
-              metric: "Memória",
-              value: "-60%",
-              context: "Redução no uso de RAM",
-              growth: "Mantendo mesmas funcionalidades"
+              metric: "Robot Control",
+              value: "15",
+              context: "Custom Blockly blocks for robotics",
+              growth: "Covering all arm movements"
             },
             {
-              metric: "Precisão",
-              value: "92%",
-              context: "Na previsão de falhas"
+              metric: "Farm Planning",
+              value: "12",
+              context: "Agricultural automation blocks",
+              growth: "Supporting major crop patterns"
             }
           ],
           scale: [
             {
-              metric: "Máquinas",
-              value: "50+",
-              context: "Equipamentos monitorados",
-              growth: "Em 3 países"
+              metric: "Development",
+              value: "2",
+              context: "Parallel MVPs delivered",
+              growth: "4 months per MVP"
             }
           ]
         }
@@ -435,7 +556,7 @@ export const resumeData = {
     frontend: ["React", "React Native", "JavaScript", "TypeScript"],
     cloud: ["Azure", "AWS", "Firebase"],
     devops: ["Git", "Azure DevOps", "GitHub Actions", "Docker", "CI/CD"],
-    data: ["MySQL", "PostgreSQL", "CosmosDB", "Real-time Processing"],
+    data: ["MySQL", "PostgreSQL", "CosmosDB", "Redis"],
     OS: ["Fedora", "Debian", "Ubuntu", "Windows", "Raspberry Pi OS", "FreeRTOS"]
   },
 

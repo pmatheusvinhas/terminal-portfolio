@@ -5,7 +5,13 @@ export interface Experience {
   location: string;
   description: string[];
   techStack: string[];
+  expandedFeatures?: {
+    showArchitecture?: boolean;
+    showMetrics?: boolean;
+    showDiagrams?: boolean;
+  };
   expanded?: ExpandedExperience;
+  atsHighlights?: string[];
 }
 
 export interface Project {
@@ -61,29 +67,35 @@ export interface ProjectDetails extends Project {
   status: 'completed' | 'in-progress' | 'archived';
 }
 
-interface ArchitectureComponent {
+export interface ArchitectureDiagram {
+  title: string;
+  description: string;
+  imageUrl: string;
+}
+
+export interface ArchitectureComponent {
   name: string;
   description: string;
   techDetails: string;
 }
 
-interface TechnicalChallenge {
+export interface TechnicalChallenge {
   problem: string;
   solution: string;
   outcome: string;
 }
 
-interface MetricItem {
+export interface MetricItem {
   metric: string;
   value: string;
   context?: string;
   growth?: string;
 }
 
-interface ExpandedExperience {
+export interface ExpandedExperience {
   architecture: {
     overview: string;
-    diagramUrl?: string;
+    diagrams?: ArchitectureDiagram[];
     components: ArchitectureComponent[];
     challenges: TechnicalChallenge[];
   };
@@ -91,5 +103,15 @@ interface ExpandedExperience {
     business: MetricItem[];
     technical: MetricItem[];
     scale: MetricItem[];
+  };
+}
+
+export interface ATSFormat {
+  sections: {
+    summary: string[];
+    expertise: {
+      [category: string]: string[];
+    };
+    achievements: string[];
   };
 } 
