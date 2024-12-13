@@ -1,8 +1,6 @@
 import React from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
 import { Print } from '@mui/icons-material';
-import { jsPDF } from 'jspdf';
-import { resumeData } from '../data/resume';
 
 export const PrintButton: React.FC = () => {
   const handlePrint = () => {

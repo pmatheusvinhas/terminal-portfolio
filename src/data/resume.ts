@@ -1,6 +1,3 @@
-import testingStationDiagram from '/diagrams/wow-testing-station.png'
-import diagnosticFlowDiagram from '/diagrams/wow-diagnostic-flow.png'
-
 const basePath = import.meta.env.BASE_URL
 
 /**
@@ -24,7 +21,7 @@ export const resumeData = {
     github: "https://github.com/pmatheusvinhas",
     summary: `Senior Software Engineer with 6+ years of experience architecting distributed systems and cloud-native solutions. 
     Expert in building high-performance applications with focus on scalability and cost optimization. 
-    Track record of reducing integration timelines by 75% and handling 500k+ daily operations.`
+    Track record of standardizing data access and achieving sub-200ms latency for 1000+ req/s.`
   },
 
   education: [

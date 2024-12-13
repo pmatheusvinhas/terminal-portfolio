@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { TechIcon } from './TechIcon';
 import { resumeData } from '../data/resume';
 import { ExpandedExperience } from './ExpandedExperience';
-import { Architecture, Analytics } from '@mui/icons-material';
 
 export const Experience: React.FC = () => {
   const [expandedStates, setExpandedStates] = useState<{
