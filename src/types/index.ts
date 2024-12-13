@@ -114,4 +114,47 @@ export interface ATSFormat {
     };
     achievements: string[];
   };
+}
+
+export interface ExpandedExperienceProps {
+  expanded: {
+    architecture: {
+      overview: string;
+      components: Array<{
+        name: string;
+        description: string;
+        techDetails: string;
+      }>;
+      challenges: Array<{
+        problem: string;
+        solution: string;
+        outcome: string;
+      }>;
+    };
+    metrics: {
+      business: Array<{
+        metric: string;
+        value: string;
+        context: string;
+        growth?: string;
+      }>;
+      technical: Array<{
+        metric: string;
+        value: string;
+        context: string;
+        growth?: string;
+      }>;
+      scale: Array<{
+        metric: string;
+        value: string;
+        context: string;
+        growth?: string;
+      }>;
+    };
+  };
+  company: string;
+  showArchitecture: boolean;
+  showMetrics: boolean;
+  onToggleArchitecture: () => void;
+  onToggleMetrics: () => void;
 } 

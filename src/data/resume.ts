@@ -15,16 +15,16 @@ const basePath = import.meta.env.BASE_URL
 export const resumeData = {
   header: {
     name: "Paulo Vinhas",
-    title: "Senior Software Engineer | Cloud & IoT Specialist",
+    title: "Senior Software Engineer | Distributed Systems",
     location: {
       current: "São Paulo, Brazil (UTC-3)",
       origin: "Rio, Brazil"
     },
     email: "paulomatheusvinhas@gmail.com",
     github: "https://github.com/pmatheusvinhas",
-    summary: `Senior Full Stack Engineer with 6 years of experience specializing in cloud-native solutions and IoT systems. 
-    Expert in architecting distributed systems and real-time applications using Azure and AWS. 
-    Proven track record of delivering high-impact solutions that process millions of requests daily.`
+    summary: `Senior Software Engineer with 6+ years of experience architecting distributed systems and cloud-native solutions. 
+    Expert in building high-performance applications with focus on scalability and cost optimization. 
+    Track record of reducing integration timelines by 75% and handling 500k+ daily operations.`
   },
 
   education: [
@@ -70,96 +70,84 @@ export const resumeData = {
 
   experience: [
     {
-      title: "Co-Founder & Principal Software Engineer",
+      title: "Co-founder & Principal Software Engineer",
       company: "Vinbol",
-      period: "Jan 2024 - Present",
+      period: "Jan 2024 - Dec 2024",
       location: "Remote",
       description: [
-        "Architected MVP for sentiment analysis combining multiple LLM providers (OpenAI, Cohere, Hugging Face)",
-        "Developed prompt engineering framework reducing token usage by 40% while maintaining 95% accuracy",
-        "Designed scalable architecture handling 100k+ daily requests with adaptive load balancing"
+        "Architected MVP for AI platform with context-aware LLM routing based on model specialization and performance characteristics",
+        "Developed intelligent routing system reducing costs by 40% by matching content complexity with appropriate models",
+        "Built scalable pipeline processing 1K+ daily requests with automated model selection and performance monitoring"
       ],
-      techStack: ["Python", "FastAPI", "Azure", "OpenAI", "Cohere", "Hugging Face"],
-      expandedFeatures: {
-        showArchitecture: true,
-        showMetrics: true,
-        showDiagrams: true
-      },
+      techStack: ["Python", "FastAPI", "Azure", "LangChain", "OpenAI", "Hugging Face"],
       expanded: {
         architecture: {
-          overview: "Multi-model NLP platform leveraging different LLM providers for optimal cost-performance ratio, featuring intelligent prompt management and adaptive load distribution",
-          diagrams: [
-            {
-              title: "AI Platform Architecture",
-              description: "Multi-provider NLP system with adaptive routing",
-              imageUrl: `${basePath}diagrams/vinbol-arch.png`
-            }
-          ],
+          overview: "AI platform featuring intelligent model selection based on content characteristics and model strengths, optimizing for both cost and accuracy through strategic routing and performance monitoring",
           components: [
             {
-              name: "Model Router",
-              description: "Intelligent routing between different LLM providers",
-              techDetails: "Python, FastAPI, Custom Routing Logic"
+              name: "Model Orchestration",
+              description: "Context-aware routing system matching content with optimal LLM",
+              techDetails: "LangChain, Custom Model Selection, Performance Analytics"
             },
             {
-              name: "Prompt Management",
-              description: "Dynamic prompt optimization system",
-              techDetails: "Token Analysis, Context Management, Caching"
+              name: "Performance Profiler",
+              description: "Real-time analysis of model performance across different contexts",
+              techDetails: "Custom Metrics, Cost Analysis, Response Quality Evaluation"
             },
             {
-              name: "Load Balancer",
-              description: "Cost and performance-aware request distribution",
-              techDetails: "Azure Functions, Queue Management"
+              name: "Adaptive Pipeline",
+              description: "Self-optimizing system learning from model performance patterns",
+              techDetails: "Performance Monitoring, Auto-adjustment, A/B Testing"
             }
           ],
           challenges: [
             {
-              problem: "High costs of LLM API calls",
-              solution: "Developed dynamic prompt optimization and caching",
-              outcome: "40% cost reduction while maintaining accuracy"
+              problem: "Varying model performance across content types",
+              solution: "Implemented content-aware routing with performance tracking",
+              outcome: "40% cost reduction with improved accuracy per context"
             },
             {
-              problem: "Varying provider performance",
-              solution: "Implemented adaptive model routing",
-              outcome: "95% accuracy with optimal cost-performance balance"
+              problem: "Balancing model capabilities and costs",
+              solution: "Developed performance profiling and automated selection",
+              outcome: "Optimal model utilization based on content requirements"
             }
           ]
         },
         metrics: {
           business: [
             {
-              metric: "Cost Efficiency",
+              metric: "Processing Cost",
               value: "-40%",
-              context: "Token usage reduction",
-              growth: "Through prompt optimization"
+              context: "Through intelligent routing",
+              growth: "Model-specific optimization"
             },
             {
-              metric: "Analysis Cost",
-              value: "$0.002",
-              context: "Per text analysis",
-              growth: "From $0.005 initial cost"
+              metric: "Context Coverage",
+              value: "95%",
+              context: "Content types handled effectively",
+              growth: "Via specialized model selection"
             }
           ],
           technical: [
             {
-              metric: "Accuracy",
-              value: "95%",
-              context: "Sentiment analysis precision",
-              growth: "Across all providers"
+              metric: "Model Efficiency",
+              value: "85%",
+              context: "Optimal model utilization",
+              growth: "Through context matching"
             },
             {
-              metric: "Response Time",
-              value: "850ms",
-              context: "Average analysis time",
-              growth: "Including routing overhead"
+              metric: "Response Quality",
+              value: "93%",
+              context: "Content-appropriate responses",
+              growth: "Via specialized routing"
             }
           ],
           scale: [
             {
               metric: "Daily Volume",
-              value: "100k+",
-              context: "Texts analyzed",
-              growth: "With adaptive scaling"
+              value: "1K+",
+              context: "High-engagement profiles analyzed",
+              growth: "With consistent quality"
             }
           ]
         }
@@ -171,53 +159,48 @@ export const resumeData = {
       period: "Jun 2021 - Dec 2023",
       location: "São Paulo, Brazil",
       description: [
-        "Led development of globally distributed data integration layer connecting enterprise systems across Brazil, Uruguay, Austria, and USA",
-        "Architected high-performance API gateway with Redis-based geo-replicated caching achieving sub-100ms response times",
-        "Reduced M&A system integration timeline from 12 to 3 months through standardized Delta Lake access protocols"
+        "Architected data distribution layer enabling standardized REST API access to enterprise Data Lake across multiple business units",
+        "Implemented high-performance caching and streaming solutions achieving 99.9% availability and sub-200ms latency for 1000+ req/s",
+        "Developed reusable connector framework reducing integration time by 60% for new data consumers"
       ],
-      techStack: ["Python", "FastAPI", "Azure", "Delta Lake", "Redis", "Docker"],
-      expandedFeatures: {
-        showArchitecture: true,
-        showMetrics: true,
-        showDiagrams: true
-      },
+      techStack: ["Python", "Kubernetes", "Redis", "Kafka", "Terraform", "AWS"],
       expanded: {
         architecture: {
-          overview: "Globally distributed data integration platform leveraging Redis geo-replication and Delta Lake protocols to enable standardized data access across international operations, facilitating rapid M&A integrations and real-time data synchronization",
+          overview: "REST API layer for enterprise Data Lake access, complementing data engineering efforts by providing standardized, high-performance data distribution to various business applications through caching, streaming, and automated scaling capabilities",
           diagrams: [
             {
-              title: "Enterprise Data Platform",
-              description: "Integration architecture with geo-distributed caching",
+              title: "Data Lake Distribution Layer",
+              description: "Distributed data access architecture with bidirectional flows",
               imageUrl: `${basePath}diagrams/nitro_architecture.png`
             }
           ],
           components: [
             {
               name: "API Gateway Layer",
-              description: "Globally distributed access point with geo-replicated caching",
-              techDetails: "Azure API Management, Redis Premium, FastAPI"
+              description: "REST interface with intelligent routing and access control",
+              techDetails: "Python, FastAPI, Service Mesh, OAuth2/JWT"
             },
             {
-              name: "Data Access Layer",
-              description: "Standardized protocols for enterprise data access",
-              techDetails: "Delta Sharing, REST APIs, Event Grid Topics"
+              name: "Data Distribution",
+              description: "High-performance data access layer with caching and streaming",
+              techDetails: "Redis Cluster, Kafka, Custom Data Transformations"
             },
             {
-              name: "Regional Services",
-              description: "Region-specific data synchronization with local caching",
-              techDetails: "Redis Geo-replication, Event Grid Topics, Regional Failover"
+              name: "Data Lake Integration",
+              description: "Efficient integration with enterprise Data Lake",
+              techDetails: "Data Lake Connectors, Query Optimization, Access Patterns"
             }
           ],
           challenges: [
             {
-              problem: "High latency in cross-region data access",
-              solution: "Implemented Redis geo-replicated caching strategy",
-              outcome: "Achieved consistent sub-100ms response times across all regions"
+              problem: "Complex Data Lake access patterns for applications",
+              solution: "Implemented standardized REST APIs with intelligent caching",
+              outcome: "Enabled self-service data access while maintaining performance"
             },
             {
-              problem: "Complex M&A data integration process (12 months)",
-              solution: "Developed standardized Delta Lake access protocols",
-              outcome: "Reduced integration timeline to 3 months with consistent patterns"
+              problem: "High latency in data retrieval for global applications",
+              solution: "Developed distributed caching and streaming strategies",
+              outcome: "Achieved sub-200ms latency with 40% resource optimization"
             }
           ]
         },
@@ -225,37 +208,37 @@ export const resumeData = {
           business: [
             {
               metric: "Integration Time",
-              value: "-75%",
-              context: "M&A system integration timeline",
-              growth: "From 12 months to 3 months"
+              value: "-60%",
+              context: "New consumer onboarding",
+              growth: "Through automation"
             },
             {
-              metric: "Global Coverage",
-              value: "4",
-              context: "Regions with local caching",
-              growth: "Brazil, Uruguay, Austria, USA"
+              metric: "Business Impact",
+              value: "10+",
+              context: "New use cases enabled",
+              growth: "Via standardized access"
             }
           ],
           technical: [
             {
               metric: "Response Time",
-              value: "50ms",
-              context: "Average global API response",
-              growth: "With geo-replicated caching"
+              value: "200ms",
+              context: "99th percentile latency",
+              growth: "With adaptive caching"
             },
             {
-              metric: "Cache Hit Rate",
-              value: "95%",
-              context: "Global cache efficiency",
-              growth: "Reducing backend load"
+              metric: "Resource Usage",
+              value: "-40%",
+              context: "Compute resources",
+              growth: "Through optimization"
             }
           ],
           scale: [
             {
-              metric: "Daily Operations",
-              value: "500k+",
-              context: "API requests handled",
-              growth: "With 99.9% availability"
+              metric: "Throughput",
+              value: "1000+",
+              context: "Requests per second",
+              growth: "99.9% availability"
             }
           ]
         }
@@ -459,7 +442,7 @@ export const resumeData = {
       period: "Jan 2019 - Feb 2020",
       location: "São Paulo, Brazil",
       description: [
-        "Led parallel MVP development of educational robotics and precision agriculture solutions",
+        "Developed MVPs for educational robotics and precision agriculture solutions",
         "Implemented Google's Blockly visual programming for both robotics education and farming automation",
         "Engineered embedded control systems for robot arm and precision CNC farming equipment"
       ],

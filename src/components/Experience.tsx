@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, Paper, Button } from '@mui/material';
+import { Box, Typography, Paper } from '@mui/material';
 import { motion } from 'framer-motion';
 import { TechIcon } from './TechIcon';
 import { resumeData } from '../data/resume';
@@ -126,7 +126,6 @@ export const Experience: React.FC = () => {
                 showMetrics={expandedStates[index]?.metrics || false}
                 onToggleArchitecture={() => handleToggleArchitecture(index)}
                 onToggleMetrics={() => handleToggleMetrics(index)}
-                showDiagrams={exp.expandedFeatures?.showDiagrams}
               />
             )}
           </Paper>
