@@ -19,9 +19,10 @@ export const resumeData = {
     },
     email: "paulomatheusvinhas@gmail.com",
     github: "https://github.com/pmatheusvinhas",
-    summary: `Senior Software Engineer with 6+ years of experience architecting distributed systems and cloud-native solutions. 
-    Expert in building high-performance applications with focus on scalability and cost optimization. 
-    Track record of standardizing data access and achieving sub-200ms latency for 1000+ req/s.`
+    summary: `Senior Software Engineer with 6+ years of experience evolving from distributed systems to AI engineering. 
+    Started by architecting high-performance cloud-native solutions achieving sub-200ms latency for 1000+ req/s, 
+    progressed to data distribution platforms, and now specializing in AI systems engineering with focus on LLM orchestration and autonomous agents. 
+    Track record of reducing costs by 40% through intelligent system design across different domains.`
   },
 
   education: [
@@ -67,46 +68,47 @@ export const resumeData = {
 
   experience: [
     {
-      title: "Co-founder & Principal Software Engineer",
+      title: "Co-founder & Principal AI Engineer",
       company: "Vinbol",
       period: "Jan 2024 - Dec 2024",
       location: "Remote",
       description: [
-        "Architected MVP for AI platform with context-aware LLM routing based on model specialization and performance characteristics",
-        "Developed intelligent routing system reducing costs by 40% by matching content complexity with appropriate models",
-        "Built scalable pipeline processing 1K+ daily requests with automated model selection and performance monitoring"
+        "Led end-to-end development of an AI orchestration platform managing multiple LLMs (OpenAI, Anthropic, Llama) with intelligent routing and performance optimization",
+        "Engineered autonomous AI agents for specialized tasks using LangChain, achieving 95% task completion rate and 40% cost reduction through context-aware model selection",
+        "Implemented MLOps pipeline with automated model evaluation, A/B testing, and performance monitoring handling 1K+ daily requests",
+        "Developed custom fine-tuning and prompt engineering framework improving model performance by 35% for domain-specific tasks"
       ],
-      techStack: ["Python", "FastAPI", "Azure", "LangChain", "OpenAI", "Hugging Face"],
+      techStack: ["Python", "LangChain", "OpenAI", "Anthropic", "Llama", "FastAPI", "Docker", "Azure", "MLflow"],
       expanded: {
         architecture: {
-          overview: "AI platform featuring intelligent model selection based on content characteristics and model strengths, optimizing for both cost and accuracy through strategic routing and performance monitoring",
+          overview: "Advanced AI orchestration platform featuring autonomous agents, intelligent model selection, and MLOps infrastructure for optimal performance and cost efficiency",
           components: [
             {
+              name: "AI Agent Framework",
+              description: "Autonomous agent system with specialized capabilities and inter-agent communication",
+              techDetails: "LangChain, Custom Agent Protocols, Task Planning Systems"
+            },
+            {
               name: "Model Orchestration",
-              description: "Context-aware routing system matching content with optimal LLM",
-              techDetails: "LangChain, Custom Model Selection, Performance Analytics"
+              description: "Intelligent routing system with real-time performance optimization",
+              techDetails: "Multi-LLM Integration, Dynamic Routing, Cost Optimization"
             },
             {
-              name: "Performance Profiler",
-              description: "Real-time analysis of model performance across different contexts",
-              techDetails: "Custom Metrics, Cost Analysis, Response Quality Evaluation"
-            },
-            {
-              name: "Adaptive Pipeline",
-              description: "Self-optimizing system learning from model performance patterns",
-              techDetails: "Performance Monitoring, Auto-adjustment, A/B Testing"
+              name: "MLOps Pipeline",
+              description: "Comprehensive ML infrastructure for model deployment and monitoring",
+              techDetails: "Docker, MLflow, Custom Metrics, A/B Testing Framework"
             }
           ],
           challenges: [
             {
-              problem: "Varying model performance across content types",
-              solution: "Implemented content-aware routing with performance tracking",
-              outcome: "40% cost reduction with improved accuracy per context"
+              problem: "Complex multi-model orchestration",
+              solution: "Developed intelligent routing system with performance profiling",
+              outcome: "40% cost reduction while maintaining 95% task success rate"
             },
             {
-              problem: "Balancing model capabilities and costs",
-              solution: "Developed performance profiling and automated selection",
-              outcome: "Optimal model utilization based on content requirements"
+              problem: "Specialized task requirements",
+              solution: "Engineered autonomous agents with domain expertise",
+              outcome: "35% improvement in domain-specific task performance"
             }
           ]
         },
