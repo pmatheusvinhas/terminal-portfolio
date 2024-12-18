@@ -11,18 +11,36 @@ export const PrintButton: React.FC = () => {
     const margin = 20;
     let y = margin;
 
+    // Função auxiliar para verificar espaço e adicionar nova página
+    const checkSpace = (neededSpace: number) => {
+      if (y + neededSpace > doc.internal.pageSize.height - margin) {
+        doc.addPage();
+        y = margin;
+        return true;
+      }
+      return false;
+    };
+
     const addSection = (title: string, content: string) => {
-      y += 10;
+      checkSpace(30); // Verifica espaço para título + conteúdo inicial
+      
       doc.setFontSize(16);
       doc.text(title, margin, y);
       y += 8;
+      
       doc.setFontSize(12);
       const lines = doc.splitTextToSize(content, doc.internal.pageSize.width - 2 * margin);
+      
+      // Verifica se precisa de nova página para o conteúdo
+      if (checkSpace(lines.length * 7)) {
+        doc.setFontSize(12);
+      }
+      
       doc.text(lines, margin, y);
-      y += lines.length * 7;
+      y += lines.length * 7 + 5;
     };
 
-    // Header usando dados do resume.ts
+    // Header
     doc.setFontSize(24);
     doc.text(header.name, margin, y);
     y += 10;
@@ -33,29 +51,29 @@ export const PrintButton: React.FC = () => {
       `Contact: ${header.email}`,
       `GitHub: ${header.github}`
     ], margin, y);
-    y += 20;
+    y += 25;
 
-    // Summary do resume.ts
+    // Summary
+    const summaryLines = doc.splitTextToSize(header.summary, doc.internal.pageSize.width - 2 * margin);
+    checkSpace(summaryLines.length * 7 + 15);
     addSection('PROFESSIONAL SUMMARY', header.summary);
 
-    // Skills do resume.ts
-    addSection('TECHNICAL EXPERTISE',
-      Object.entries(skills)
-        .map(([category, items]) => `${category}: ${items.join(' | ')}`)
-        .join('\n')
-    );
+    // Technical Expertise
+    const techContent = Object.entries(skills)
+      .map(([category, items]) => `${category}: ${items.join(' | ')}`)
+      .join('\n');
+    checkSpace(40);
+    addSection('TECHNICAL EXPERTISE', techContent);
 
-    // Experience do resume.ts com métricas
-    y += 10;
+    // Professional Experience
+    checkSpace(20);
     doc.setFontSize(16);
     doc.text('PROFESSIONAL EXPERIENCE', margin, y);
     y += 10;
 
     experience.forEach(exp => {
-      if (y > doc.internal.pageSize.height - 50) {
-        doc.addPage();
-        y = margin;
-      }
+      // Verifica espaço para cada experiência
+      checkSpace(40);
 
       // Título e período
       doc.setFontSize(14);
@@ -65,66 +83,62 @@ export const PrintButton: React.FC = () => {
       doc.text(`${exp.period} | ${exp.location}`, margin, y);
       y += 7;
 
-      // Achievements com métricas
+      // Métricas
       if (exp.expanded?.metrics) {
-        const achievements = Object.entries(exp.expanded.metrics)
-          .flatMap(([_, items]) => 
-            items.map(item => `• ${item.metric}: ${item.value} ${item.context ? `(${item.context})` : ''}`)
-          );
-        
-        achievements.forEach(achievement => {
-          const lines = doc.splitTextToSize(achievement, doc.internal.pageSize.width - 2 * margin);
-          doc.text(lines, margin, y);
-          y += lines.length * 7;
+        Object.entries(exp.expanded.metrics).forEach(([_, items]) => {
+          items.forEach(item => {
+            const metricText = `• ${item.metric}: ${item.value} ${item.context ? `(${item.context})` : ''}`;
+            const lines = doc.splitTextToSize(metricText, doc.internal.pageSize.width - 2 * margin);
+            
+            checkSpace(lines.length * 7);
+            doc.text(lines, margin, y);
+            y += lines.length * 7;
+          });
         });
       }
 
-      // Responsabilidades principais
+      // Descrições
       exp.description.forEach(desc => {
         const lines = doc.splitTextToSize(`• ${desc}`, doc.internal.pageSize.width - 2 * margin);
+        checkSpace(lines.length * 7);
         doc.text(lines, margin, y);
         y += lines.length * 7;
       });
 
       // Tech Stack
-      doc.text(`Technical Environment: ${exp.techStack.join(' | ')}`, margin, y);
-      y += 10;
+      const techStackLines = doc.splitTextToSize(
+        `Technical Environment: ${exp.techStack.join(' | ')}`,
+        doc.internal.pageSize.width - 2 * margin
+      );
+      checkSpace(techStackLines.length * 7 + 10);
+      doc.text(techStackLines, margin, y);
+      y += techStackLines.length * 7 + 10;
     });
 
-    // Education - Mantendo relevante e conciso
-    if (y > doc.internal.pageSize.height - 50) {
-      doc.addPage();
-      y = margin;
-    }
+    // Education
+    const eduContent = education
+      .map(edu => `${edu.degree}\n${edu.institution} (${edu.period})`)
+      .join('\n\n');
+    checkSpace(30);
+    addSection('EDUCATION', eduContent);
 
-    addSection('EDUCATION',
-      education.map(edu => 
-        `${edu.degree}\n${edu.institution} (${edu.period})`
-      ).join('\n\n')
-    );
+    // Certifications
+    const certContent = certifications
+      .map(cert => `${cert.name} - ${cert.issuer} (${cert.year})`)
+      .join('\n');
+    checkSpace(30);
+    addSection('PROFESSIONAL CERTIFICATIONS', certContent);
 
-    // Certifications - Destacando desenvolvimento contínuo
-    if (y > doc.internal.pageSize.height - 50) {
-      doc.addPage();
-      y = margin;
-    }
-
-    addSection('PROFESSIONAL CERTIFICATIONS',
-      certifications.map(cert => 
-        `${cert.name} - ${cert.issuer} (${cert.year})`
-      ).join('\n')
-    );
-
-    // Portfolio Link - Após todas as seções principais
-    y += 15;
+    // Portfolio Link
+    checkSpace(20);
     doc.setFontSize(12);
-    doc.setTextColor(0, 0, 238); // Cor de link azul padrão
+    doc.setTextColor(0, 0, 238);
     doc.text(
       'Portfolio & More About Me: https://pmatheusvinhas.github.io/terminal-portfolio',
       margin,
       y
     );
-    doc.setTextColor(0); // Volta para preto
+    doc.setTextColor(0);
 
     doc.save('paulo-vinhas-cv.pdf');
   };
