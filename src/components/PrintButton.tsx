@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, IconButton, Tooltip } from '@mui/material';
+import { Box, IconButton, Tooltip, Typography } from '@mui/material';
 import { Print, Description } from '@mui/icons-material';
 import { jsPDF } from 'jspdf';
 import { resumeData } from '../data/resume';
@@ -213,7 +213,7 @@ export const PrintButton: React.FC = () => {
       // Impact and Metrics
       if (exp.expanded?.metrics) {
         addText("Impact and Results:", 12);
-        Object.entries(exp.expanded.metrics).forEach(([category, items]) => {
+        Object.entries(exp.expanded.metrics).forEach(([_, items]) => {
           items.forEach(item => {
             addText(`• ${item.metric}: ${item.value} ${item.context ? `(${item.context})` : ''}`);
           });

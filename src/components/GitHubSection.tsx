@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Paper, Grid, CircularProgress, Chip } from '@mui/material';
+import { Box, Typography, Paper, Grid, CircularProgress } from '@mui/material';
 import { motion } from 'framer-motion';
 import { resumeData } from '../data/resume';
 import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, PieChart, Pie, Cell, ResponsiveContainer, Legend, LineChart, CartesianGrid, Line } from 'recharts';
