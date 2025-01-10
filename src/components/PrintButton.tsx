@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, IconButton, Tooltip, Typography } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import { Print, Description } from '@mui/icons-material';
 import { jsPDF } from 'jspdf';
 import { resumeData } from '../data/resume';
