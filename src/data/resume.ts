@@ -27,7 +27,7 @@ export const resumeData = {
 
   education: [
     {
-      degree: "Master in Data & Analytics",
+      degree: "Master in Data Engineering",
       institution: "FIA Business School",
       period: "2022-2024"
     },
@@ -73,12 +73,12 @@ export const resumeData = {
       period: "Jan 2024 - Dec 2024",
       location: "Remote",
       description: [
-        "Led end-to-end development of an AI orchestration platform managing multiple LLMs (OpenAI, Anthropic, Llama) with intelligent routing and performance optimization",
+        "Led end-to-end development of an AI orchestration platform managing multiple LLMs (OpenAI, Anthropic, Cohere) with intelligent routing and performance optimization",
         "Engineered autonomous AI agents for specialized tasks using LangChain, achieving 95% task completion rate and 40% cost reduction through context-aware model selection",
         "Implemented MLOps pipeline with automated model evaluation, A/B testing, and performance monitoring handling 1K+ daily requests",
         "Developed custom fine-tuning and prompt engineering framework improving model performance by 35% for domain-specific tasks"
       ],
-      techStack: ["Python", "LangChain", "OpenAI", "Anthropic", "Llama", "FastAPI", "Docker", "Azure", "MLflow"],
+      techStack: ["Python", "LangChain", "OpenAI", "Anthropic", "Cohere", "FastAPI", "Docker", "Azure", "MLflow"],
       expanded: {
         architecture: {
           overview: "Advanced AI orchestration platform featuring autonomous agents, intelligent model selection, and MLOps infrastructure for optimal performance and cost efficiency",

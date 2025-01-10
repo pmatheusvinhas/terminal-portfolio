@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, IconButton, Tooltip } from '@mui/material';
-import { Print } from '@mui/icons-material';
+import { Print, Description } from '@mui/icons-material';
 import { jsPDF } from 'jspdf';
 import { resumeData } from '../data/resume';
 
@@ -143,6 +143,138 @@ export const PrintButton: React.FC = () => {
     doc.save('paulo-vinhas-cv.pdf');
   };
 
+  const handleExtendedProfile = () => {
+    const doc = new jsPDF();
+    const margin = 20;
+    let y = margin;
+
+    // Função auxiliar para adicionar texto com quebra de página
+    const addText = (text: string, fontSize: number = 12) => {
+      doc.setFontSize(fontSize);
+      const lines = doc.splitTextToSize(text, doc.internal.pageSize.width - 2 * margin);
+      
+      if (y + (lines.length * 7) > doc.internal.pageSize.height - margin) {
+        doc.addPage();
+        y = margin;
+      }
+      
+      doc.text(lines, margin, y);
+      y += lines.length * 7 + 5;
+    };
+
+    // Header
+    addText("Extended Professional Profile - Paulo Vinhas", 24);
+    y += 10;
+
+    // Problem Solver Profile
+    addText("PROBLEM SOLVER PROFILE", 16);
+    y += 5;
+    addText(`As a senior software engineer, I approach challenges through systematic problem decomposition and innovative solution design. My experience spans from optimizing embedded systems to architecting distributed platforms and AI solutions. Key strengths include:
+
+    • Strategic Thinking: Ability to understand business context and design technical solutions that address root causes
+    • Innovation Focus: Track record of introducing new technologies and approaches to solve complex problems
+    • Scalable Solutions: Experience in designing systems that can grow and adapt to changing requirements
+    • Cross-functional Leadership: Success in leading teams and collaborating across departments`);
+    y += 15;
+
+    // Detailed Experience
+    addText("DETAILED EXPERIENCE", 16);
+    y += 5;
+
+    resumeData.experience.forEach(exp => {
+      addText(`${exp.title} @ ${exp.company} (${exp.period})`, 14);
+      y += 5;
+
+      // Context and Challenges
+      if (exp.expanded?.architecture) {
+        addText("Context:", 12);
+        addText(exp.expanded.architecture.overview);
+        y += 10;
+
+        addText("Technical Challenges:", 12);
+        exp.expanded.architecture.challenges.forEach(challenge => {
+          addText(`• Problem: ${challenge.problem}`);
+          addText(`  Solution: ${challenge.solution}`);
+          addText(`  Outcome: ${challenge.outcome}`);
+          y += 5;
+        });
+      }
+
+      // Technical Implementation
+      if (exp.expanded?.architecture.components) {
+        addText("Technical Implementation:", 12);
+        exp.expanded.architecture.components.forEach(component => {
+          addText(`• ${component.name}: ${component.description}`);
+          addText(`  Tech Stack: ${component.techDetails}`);
+          y += 5;
+        });
+      }
+
+      // Impact and Metrics
+      if (exp.expanded?.metrics) {
+        addText("Impact and Results:", 12);
+        Object.entries(exp.expanded.metrics).forEach(([category, items]) => {
+          items.forEach(item => {
+            addText(`• ${item.metric}: ${item.value} ${item.context ? `(${item.context})` : ''}`);
+          });
+        });
+      }
+      y += 15;
+    });
+
+    // Leadership & Communication Style
+    addText("LEADERSHIP APPROACH", 16);
+    y += 5;
+    addText(`My leadership style combines technical expertise with strong communication and mentorship abilities:
+
+    • Team Building: Led development teams at Nitro Química and managed contractors at Vinbol, focusing on clear communication and knowledge sharing
+    • Stakeholder Management: Collaborated with 18 business units across 4 countries at Nitro Química, translating business requirements into technical solutions
+    • Technical Mentorship: Mentored junior engineers, focusing on code quality and architectural best practices
+    • Cross-functional Leadership: Acted as technical Product Owner, bridging business needs with technical implementation`);
+    y += 15;
+
+    // Problem-Solving Approach
+    addText("TECHNICAL DECISION MAKING", 16);
+    y += 5;
+    addText(`My approach to technical challenges combines systematic analysis with practical implementation:
+
+    • Requirements Analysis: Deep dive into business context to understand root causes and design appropriate solutions
+    • Technology Selection: Balance between innovation and reliability, considering team capabilities and business constraints
+    • Quality Assurance: Implement robust testing and monitoring strategies to ensure solution reliability
+    • Knowledge Transfer: Create comprehensive documentation and knowledge sharing processes`);
+    y += 15;
+
+    // Project Deep Dives
+    resumeData.experience.forEach(exp => {
+      addText(`${exp.title} @ ${exp.company} (${exp.period})`, 14);
+      y += 5;
+
+      // Leadership Context
+      addText("Leadership Context:", 12);
+      if (exp.company === "Nitro Química") {
+        addText(`Led a cross-functional initiative involving 18 business units across 4 countries. Managed a junior engineer while acting as technical Product Owner, translating complex business requirements into technical specifications. Established development standards and mentoring processes.`);
+      } else if (exp.company === "Vinbol") {
+        addText(`Co-founded and led technical direction, managing contractors for specific deliverables. Established AI development practices and quality standards. Direct collaboration with stakeholders for requirements gathering and solution design.`);
+      }
+      y += 10;
+
+      // Technical Implementation
+      // ... resto do código existente ...
+    });
+
+    // Communication Examples
+    addText("STAKEHOLDER COMMUNICATION", 16);
+    y += 5;
+    addText(`Examples of effective technical communication:
+
+    • Business Stakeholders: Translated complex data architecture concepts into business value propositions at Nitro Química
+    • Technical Teams: Created comprehensive documentation and knowledge sharing processes
+    • Cross-functional Teams: Facilitated communication between business units and development team
+    • Executive Level: Presented technical strategies and ROI analysis to leadership`);
+
+    doc.save('paulo-vinhas-extended-profile.pdf');
+  };
+
   return (
     <Box
       className="no-print"
@@ -151,20 +283,18 @@ export const PrintButton: React.FC = () => {
         top: 16,
         right: 16,
         zIndex: 1000,
+        display: 'flex',
+        gap: 1
       }}
     >
-      <Tooltip title="Download Resume">
-        <IconButton 
-          onClick={handlePrint} 
-          sx={{ 
-            bgcolor: 'background.paper',
-            '&:hover': {
-              bgcolor: 'background.paper',
-              opacity: 0.8
-            }
-          }}
-        >
+      <Tooltip title="Download ATS Resume">
+        <IconButton onClick={handlePrint} sx={{ bgcolor: 'background.paper' }}>
           <Print />
+        </IconButton>
+      </Tooltip>
+      <Tooltip title="Download Extended Profile">
+        <IconButton onClick={handleExtendedProfile} sx={{ bgcolor: 'background.paper' }}>
+          <Description />
         </IconButton>
       </Tooltip>
     </Box>

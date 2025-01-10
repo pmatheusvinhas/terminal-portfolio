@@ -34,11 +34,11 @@ const App: React.FC = () => {
         <Box sx={{ my: 4 }}>
           <Certifications />
         </Box>
-        <Box sx={{ my: 4 }}>
-          <Hobbies />
-        </Box>
         <Box sx={{ my: 4 }} className="no-print">
           <GitHubSection />
+        </Box>
+        <Box sx={{ my: 4 }}>
+          <Hobbies />
         </Box>
         <Footer />
       </Container>

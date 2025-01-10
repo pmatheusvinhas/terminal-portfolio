@@ -94,15 +94,26 @@ export const GitHubSection: React.FC = () => {
         const reposResponse = await githubFetch(
           `https://api.github.com/user/repos?per_page=100&type=all&sort=updated`
         );
+        
+        if (!reposResponse.ok) {
+          throw new Error(`GitHub API error: ${reposResponse.status}`);
+        }
+        
         const allRepos = await reposResponse.json();
+        
+        if (!Array.isArray(allRepos)) {
+          throw new Error('Invalid response format from GitHub API');
+        }
         
         // Only filter for display in the featured section
         const publicReposData = allRepos
-          .filter((repo: Repository) => repo.visibility === 'public')
+          .filter((repo: Repository) => repo && repo.visibility === 'public' && repo.name)
           .sort(() => Math.random() - 0.5)
           .slice(0, 4);
         
-        setPinnedRepos(publicReposData);
+        if (!pinnedRepos.length) {
+          setPinnedRepos(publicReposData);
+        }
 
         const languages: { [key: string]: number } = {};
         const topics: { [key: string]: number } = {};
@@ -173,9 +184,15 @@ export const GitHubSection: React.FC = () => {
     const loadPinnedRepos = async () => {
       try {
         const repos = await fetchPinnedRepos();
-        setPinnedRepos(repos);
+        if (Array.isArray(repos) && repos.length > 0) {
+          setPinnedRepos(repos);
+        } else {
+          console.warn('No pinned repositories found or invalid data received');
+          setPinnedRepos([]);
+        }
       } catch (error) {
         console.error('Failed to load pinned repositories:', error);
+        setPinnedRepos([]);
       }
     };
 
@@ -322,7 +339,7 @@ export const GitHubSection: React.FC = () => {
           color: 'primary.main'
         }
       }}>
-        GitHub Analytics
+        Open source contributions
       </Typography>
 
       <Grid container spacing={3}>
@@ -454,7 +471,7 @@ export const GitHubSection: React.FC = () => {
             Featured Public Projects
           </Typography>
           <Grid container spacing={2}>
-            {pinnedRepos.map((repo) => (
+            {pinnedRepos?.filter(repo => repo && repo.name).map((repo) => (
               <Grid item xs={12} md={6} key={repo.name}>
                 <Paper
                   component={motion.div}
@@ -470,13 +487,13 @@ export const GitHubSection: React.FC = () => {
                       bgcolor: 'background.paper',
                     }
                   }}
-                  onClick={() => window.open(repo.url, '_blank')}
+                  onClick={() => repo.url && window.open(repo.url, '_blank')}
                 >
                   <Typography variant="h6" color="primary.main" gutterBottom>
                     {repo.name}
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    {repo.description}
+                    {repo.description || 'No description available'}
                   </Typography>
                   {repo.primaryLanguage && (
                     <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
@@ -485,7 +502,7 @@ export const GitHubSection: React.FC = () => {
                           width: 12,
                           height: 12,
                           borderRadius: '50%',
-                          bgcolor: repo.primaryLanguage.color,
+                          bgcolor: repo.primaryLanguage.color || '#ccc',
                         }}
                       />
                       <Typography variant="body2">
@@ -497,59 +514,6 @@ export const GitHubSection: React.FC = () => {
               </Grid>
             ))}
           </Grid>
-        </Grid>
-
-        <Grid item xs={12}>
-          <Paper 
-            sx={{ 
-              p: { xs: 2, md: 3 },
-              mt: 4, 
-              background: 'linear-gradient(45deg, rgba(187,134,252,0.1), rgba(3,218,198,0.1))',
-              border: '1px solid rgba(187,134,252,0.2)'
-            }}
-          >
-            <Typography variant="h6" gutterBottom color="primary.main">
-              About GitHub Analytics
-            </Typography>
-            <Typography 
-              variant="body1" 
-              sx={{ 
-                mb: 2,
-                fontSize: { xs: '0.9rem', md: '1rem' }
-              }}
-            >
-              This section is powered by GitHub's GraphQL and REST APIs, demonstrating real-time integration and data visualization capabilities. The analytics above are automatically generated and updated based on my GitHub activity.
-            </Typography>
-            <Typography 
-              variant="body2" 
-              color="text.secondary"
-              sx={{ fontSize: { xs: '0.8rem', md: '0.875rem' } }}
-            >
-              Tech stack: GitHub GraphQL API, GitHub REST API, React, Material-UI, Recharts
-            </Typography>
-            <Box sx={{ 
-              mt: 2, 
-              display: 'flex', 
-              gap: 1,
-              flexWrap: 'wrap'
-            }}>
-              <Chip 
-                label="Real-time Data" 
-                size="small" 
-                sx={{ bgcolor: 'rgba(187,134,252,0.1)' }}
-              />
-              <Chip 
-                label="GraphQL Integration" 
-                size="small" 
-                sx={{ bgcolor: 'rgba(3,218,198,0.1)' }}
-              />
-              <Chip 
-                label="Data Visualization" 
-                size="small" 
-                sx={{ bgcolor: 'rgba(187,134,252,0.1)' }}
-              />
-            </Box>
-          </Paper>
         </Grid>
       </Grid>
     </Box>
