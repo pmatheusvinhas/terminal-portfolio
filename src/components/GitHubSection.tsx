@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Paper, Grid, CircularProgress } from '@mui/material';
+import { Box, Typography, Paper, Grid, CircularProgress, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
 import { resumeData } from '../data/resume';
 import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, PieChart, Pie, Cell, ResponsiveContainer, Legend, LineChart, CartesianGrid, Line } from 'recharts';
 import { Code, Storage, Cloud, Timeline, Assessment, Speed } from '@mui/icons-material';
 import { githubFetch, fetchPinnedRepos } from '../utils/github';
+import TerminalInnovations from './TerminalInnovations';
 
 interface Repository {
   name: string;
@@ -67,16 +68,23 @@ export const GitHubSection: React.FC = () => {
     languagesByRepo: {},
     totalBytes: 0,
     activityByMonth: {},
-    domainFocus: { backend: 0, frontend: 0, infrastructure: 0 },
+    domainFocus: {
+      backend: 0,
+      frontend: 0,
+      infrastructure: 0,
+    },
     commitTrends: {
       morning: 0,
       afternoon: 0,
       evening: 0,
-      night: 0
+      night: 0,
     }
   });
-  const [pinnedRepos, setPinnedRepos] = useState<Repository[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [repositories, setRepositories] = useState<Repository[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [pinnedRepos, setPinnedRepos] = useState<any[]>([]);
+  const [loadingPinned, setLoadingPinned] = useState<boolean>(true);
+  const theme = useTheme();
   const username = resumeData.header.github.split('/').pop();
 
   const categorizeTech = (language: string): 'backend' | 'frontend' | 'infrastructure' => {
@@ -465,55 +473,14 @@ export const GitHubSection: React.FC = () => {
           </Paper>
         </Grid>
 
-        {/* Featured Projects */}
+        {/* Featured Projects - Substituído pelo TerminalInnovations */}
         <Grid item xs={12}>
-          <Typography variant="h6" gutterBottom sx={{ mt: 2 }}>
-            Featured Public Projects
-          </Typography>
-          <Grid container spacing={2}>
-            {pinnedRepos?.filter(repo => repo && repo.name).map((repo) => (
-              <Grid item xs={12} md={6} key={repo.name}>
-                <Paper
-                  component={motion.div}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  whileHover={{ y: -5 }}
-                  sx={{ 
-                    p: 3,
-                    height: '100%',
-                    minHeight: 150,
-                    cursor: 'pointer',
-                    '&:hover': {
-                      bgcolor: 'background.paper',
-                    }
-                  }}
-                  onClick={() => repo.url && window.open(repo.url, '_blank')}
-                >
-                  <Typography variant="h6" color="primary.main" gutterBottom>
-                    {repo.name}
-                  </Typography>
-                  <Typography variant="body2" color="text.secondary">
-                    {repo.description || 'No description available'}
-                  </Typography>
-                  {repo.primaryLanguage && (
-                    <Box sx={{ mt: 2, display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <Box
-                        sx={{
-                          width: 12,
-                          height: 12,
-                          borderRadius: '50%',
-                          bgcolor: repo.primaryLanguage.color || '#ccc',
-                        }}
-                      />
-                      <Typography variant="body2">
-                        {repo.primaryLanguage.name}
-                      </Typography>
-                    </Box>
-                  )}
-                </Paper>
-              </Grid>
-            ))}
-          </Grid>
+          <Paper sx={{ p: 3, mb: 0 }}>
+            <Typography variant="h6" gutterBottom sx={{ color: theme.palette.primary.main, borderBottom: `1px solid ${theme.palette.primary.main}`, pb: 1 }}>
+              Public Code Lab & Innovations
+            </Typography>
+            <TerminalInnovations />
+          </Paper>
         </Grid>
       </Grid>
     </Box>

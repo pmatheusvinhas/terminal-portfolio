@@ -162,7 +162,7 @@ export const resumeData = {
         "Implemented high-performance caching and streaming solutions achieving 99.9% availability and sub-200ms latency for 1000+ req/s",
         "Developed reusable connector framework reducing integration time by 60% for new data consumers"
       ],
-      techStack: ["Python", "Kubernetes", "Redis", "Kafka", "Terraform", "AWS"],
+      techStack: ["Node.js", "JavaScript", "TypeScript", "Kubernetes", "Redis", "Kafka", "Terraform", "AWS"],
       expanded: {
         architecture: {
           overview: "REST API layer for enterprise Data Lake access, complementing data engineering efforts by providing standardized, high-performance data distribution to various business applications through caching, streaming, and automated scaling capabilities",
@@ -246,8 +246,8 @@ export const resumeData = {
     {
       title: "Software Engineer",
       company: "HOTTEC",
-      period: "Dec 2020 - Jul 2021",
-      location: "São Paulo, Brazil",
+      period: "Aug 2020 - Jul 2021",
+      location: "Santo André, Brazil",
       description: [
         "Modernized legacy vibration analysis system through complete redesign from Windows Embedded to Raspberry Pi OS",
         "Implemented real-time signal processing and FFT analysis in C/C++ with GSL library",
@@ -340,8 +340,8 @@ export const resumeData = {
     {
       title: "Software Engineer",
       company: "WOW Smart Homes",
-      period: "Mar 2020 - Nov 2020",
-      location: "São Paulo, Brazil",
+      period: "Aug 2019 - Jul 2020",
+      location: "Barueri, Brazil",
       description: [
         "Engineered automated testing station reducing device validation time by 87%",
         "Developed lightweight diagnostic web interface for ESP8266-based IoT devices",
@@ -437,8 +437,8 @@ export const resumeData = {
     },
     {
       title: "Software Engineer",
-      company: "Open Source Machinery",
-      period: "Jan 2019 - Feb 2020",
+      company: "Tekla Industrial Têxtil",
+      period: "Jul 2018 - Jul 2019",
       location: "São Paulo, Brazil",
       description: [
         "Developed MVPs for educational robotics and precision agriculture solutions",
@@ -534,7 +534,7 @@ export const resumeData = {
   ],
 
   skills: {
-    backend: ["Python", "Node.js", "FastAPI", "Microservices", "C"],
+    backend: ["Python", "Node.js", "TypeScript", "FastAPI", "Microservices", "C"],
     frontend: ["React", "React Native", "JavaScript", "TypeScript"],
     cloud: ["Azure", "AWS", "Firebase"],
     devops: ["Git", "Azure DevOps", "GitHub Actions", "Docker", "CI/CD"],

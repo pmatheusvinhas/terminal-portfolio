@@ -95,6 +95,36 @@ public/images/
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
+## 🛠️ Component Documentation
+
+### Tech Badge System
+
+The portfolio includes a comprehensive tech badge system for visually representing technology skills:
+
+#### Components
+- `TechBadge`: Renders a visual badge for each technology with a consistent appearance
+- `Skills`: Main component that displays all skills categorized with interactive features
+- `SkillDetailModal`: Shows detailed information when clicking on a skill, including:
+  - Related professional experience
+  - GitHub projects using that technology
+  - Skill proficiency level
+
+#### Features
+- **Skill Proficiency Levels**: Clear indication of expertise (Expert, Advanced, Intermediate, Beginner)
+- **GitHub Integration**: Dynamically fetches repositories that use the selected technology
+- **Professional Experience**: Links skills to job experience entries for context
+- **Interactive Visualization**: Toggle between list and chart views for different perspectives
+- **Privacy Control**: Distinguishes between public and private projects
+
+#### Usage in Other Components
+The tech badges are used throughout the portfolio:
+- In the Skills section as interactive elements
+- In Experience entries as keyword tags
+- In project descriptions to highlight technologies used
+
+#### Customization
+To add or modify skill levels, edit the `SKILL_LEVELS` constant in `src/components/Skills.tsx`.
+
 ## 👨‍💻 Author & Credits
 
 **Original Author:** [Paulo Vinhas](https://github.com/pmatheusvinhas)

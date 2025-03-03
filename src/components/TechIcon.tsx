@@ -53,7 +53,8 @@ const techIcons: Record<string, string> = {
   // AI/ML Platforms
   OpenAI: 'https://cdn.worldvectorlogo.com/logos/openai-2.svg',
   Cohere: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3WuRejEdFZztwzqeiU387e9W4Nq0kJ07Uhl6SC6GHzoqJAYoQcxeyvbOreC46chCWz24&usqp=CAU',
-  'Hugging Face': 'https://huggingface.co/front/assets/huggingface_logo-noborder.svg'
+  'Hugging Face': 'https://huggingface.co/front/assets/huggingface_logo-noborder.svg',
+  MLFlow: 'https://github.com/mlflow-automation.png'
 };
 
 interface TechIconProps {

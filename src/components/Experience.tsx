@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Box, Typography, Paper } from '@mui/material';
+import { Box, Typography, Paper, Chip, Grid, Tabs, Tab, useMediaQuery, useTheme, Divider } from '@mui/material';
 import { motion } from 'framer-motion';
-import { TechIcon } from './TechIcon';
+import TechBadge from './TechBadge';
 import { resumeData } from '../data/resume';
 import { ExpandedExperience } from './ExpandedExperience';
 
@@ -9,6 +9,7 @@ export const Experience: React.FC = () => {
   const [expandedStates, setExpandedStates] = useState<{
     [key: string]: { architecture: boolean; metrics: boolean };
   }>({});
+  const theme = useTheme();
 
   const handleToggleArchitecture = (index: number) => {
     setExpandedStates((prev) => ({
@@ -94,6 +95,60 @@ export const Experience: React.FC = () => {
               {exp.location}
             </Typography>
 
+            {/* Tech Stack Tags - Nova implementação mais visual */}
+            <Box 
+              sx={{ 
+                display: 'flex', 
+                flexWrap: 'wrap', 
+                gap: 1, 
+                mt: 2, 
+                mb: 2,
+                p: 1.5,
+                borderRadius: 1,
+                bgcolor: 'rgba(0,0,0,0.2)',
+                border: '1px solid',
+                borderColor: 'grey.800',
+              }}
+            >
+              <Typography 
+                variant="caption" 
+                sx={{ 
+                  mr: 1, 
+                  color: 'text.secondary',
+                  display: 'flex',
+                  alignItems: 'center',
+                  '&::before': {
+                    content: '"$"',
+                    color: theme.palette.mode === 'dark' ? 'primary.main' : 'primary.light',
+                    mr: 1,
+                    fontFamily: 'monospace'
+                  }
+                }}
+              >
+                Tech Stack:
+              </Typography>
+              
+              {exp.techStack.map(tech => (
+                <Chip
+                  key={tech}
+                  label={tech}
+                  size="small"
+                  sx={{
+                    bgcolor: 'background.paper',
+                    borderRadius: '4px',
+                    fontFamily: 'monospace',
+                    fontSize: '0.75rem',
+                    fontWeight: 'medium',
+                    transition: 'all 0.2s',
+                    '&:hover': {
+                      bgcolor: 'primary.dark',
+                      color: 'white',
+                    }
+                  }}
+                />
+              ))}
+            </Box>
+
             <Box sx={{ my: 2 }}>
               {exp.description.map((desc, i) => (
                 <Typography 
@@ -108,12 +163,6 @@ export const Experience: React.FC = () => {
                 >
                   {desc}
                 </Typography>
-              ))}
-            </Box>
-
-            <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-              {exp.techStack.map((tech) => (
-                <TechIcon key={tech} tech={tech} />
               ))}
             </Box>
 
