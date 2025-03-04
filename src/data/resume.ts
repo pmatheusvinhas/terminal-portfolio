@@ -250,10 +250,10 @@ export const resumeData = {
       location: "Santo André, Brazil",
       description: [
         "Modernized legacy vibration analysis system through complete redesign from Windows Embedded to Raspberry Pi OS",
-        "Implemented real-time signal processing and FFT analysis in C/C++ with GSL library",
+        "Implemented real-time signal processing and FFT analysis in C and C++ with GSL library",
         "Eliminated 8 years of technical debt while reducing development costs by 65%"
       ],
-      techStack: ["C/C++", "Python", "Raspberry Pi OS", "FFT", "AWS"],
+      techStack: ["C", "C++", "Python", "Raspberry Pi OS", "AWS"],
       expandedFeatures: {
         showArchitecture: true,
         showMetrics: true,
@@ -347,7 +347,7 @@ export const resumeData = {
         "Developed lightweight diagnostic web interface for ESP8266-based IoT devices",
         "Designed future-proof architecture for testing and monitoring infrastructure"
       ],
-      techStack: ["Python", "C++", "ESP8266", "HTML/CSS", "PyTest"],
+      techStack: ["Python", "C++", "ESP8266", "React", "PyTest"],
       expandedFeatures: {
         showArchitecture: true,
         showMetrics: true,
@@ -534,12 +534,61 @@ export const resumeData = {
   ],
 
   skills: {
-    backend: ["Python", "Node.js", "TypeScript", "FastAPI", "Microservices", "C"],
-    frontend: ["React", "React Native", "JavaScript", "TypeScript"],
-    cloud: ["Azure", "AWS", "Firebase"],
-    devops: ["Git", "Azure DevOps", "GitHub Actions", "Docker", "CI/CD"],
-    data: ["MySQL", "PostgreSQL", "CosmosDB", "Redis"],
-    OS: ["Fedora", "Debian", "Ubuntu", "Windows", "Raspberry Pi OS", "FreeRTOS"]
+    backend: [
+      { name: "Python", level: "Advanced" },
+      { name: "Node.js", level: "Advanced" },
+      { name: "Express.js", level: "Advanced" },
+      { name: "TypeScript", level: "Advanced" },
+      { name: "FastAPI", level: "Intermediate" },
+      { name: "Microservices", level: "Intermediate" },
+      { name: "Modular Mononolith", level: "Intermediate" },
+      { name: "C++", level: "Advanced" },
+      { name: "Rust", level: "Beginner" },
+    ],
+    frontend: [
+      { name: "React", level: "Advanced" },
+      { name: "React Native", level: "Advanced" },
+      { name: "Vite", level: "Intermediate" },
+      { name: "Next.js", level: "Intermediate" },
+      { name: "JavaScript", level: "Advanced" },
+      { name: "TypeScript", level: "Advanced" },
+      { name: "TailwindCSS", level: "Advanced" },
+      { name: "Material UI", level: "Intermediate" }
+      
+    ],
+    cloud: [
+      { name: "Azure", level: "Advanced" },
+      { name: "AWS", level: "Advanced" },
+      { name: "GCP", level: "Intermediate" },
+      { name: "Firebase", level: "Advanced" }
+    ],
+    devops: [
+      { name: "Git", level: "Advanced" },
+      { name: "Azure DevOps", level: "Advanced" },
+      { name: "GitHub Actions", level: "Advanced" },
+      { name: "Docker", level: "Advanced" },
+      { name: "CI/CD", level: "Advanced" },
+      { name: "Kubernetes", level: "Intermediate" },
+      { name: "Terraform", level: "Beginner" },
+    ],
+    data: [
+      { name: "MySQL", level: "Intermediate" },
+      { name: "PostgreSQL", level: "Advanced" },
+      { name: "CosmosDB", level: "Intermediate" },
+      { name: "Redis", level: "Intermediate" },
+      { name: "MongoDB", level: "Intermediate" },
+      { name: "Kafka", level: "Intermediate" }
+    ],
+    AI: [
+      { name: "LangChain", level: "Intermediate" },
+      { name: "PyTorch", level: "Advanced" },
+      { name: "TensorFlow", level: "Advanced" },
+      { name: "Hugging Face", level: "Intermediate" },
+      { name: "OpenAI", level: "Intermediate" },
+      { name: "Anthropic", level: "Intermediate" },
+      { name: "Cohere", level: "Intermediate" },
+      { name: "MLFlow", level: "Intermediate" }
+    ]
   },
 
   hobbies: {

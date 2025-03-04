@@ -19,6 +19,7 @@ import { motion } from 'framer-motion';
 import { resumeData } from '../data/resume';
 import TechBadge from './TechBadge';
 import { fetchReposByTech } from '../utils/github';
+import { getSkillLevel } from './Skills'; // Importando a função
 
 interface SkillDetailModalProps {
   open: boolean;
@@ -38,78 +39,6 @@ const findRelatedExperiences = (skill: string) => {
       desc.toLowerCase().includes(skill.toLowerCase())
     ).slice(0, 2) // Limitamos a 2 pontos chave relacionados
   }));
-};
-
-// Nível de proficiência baseado no skill
-const getSkillLevel = (skill: string) => {
-  // Referência direta aos mesmos níveis usados no componente Skills
-  const SKILL_LEVELS: Record<string, string> = {
-    // Frontend
-    'React': 'Expert',
-    'TypeScript': 'Expert',
-    'JavaScript': 'Expert',
-    'HTML/CSS': 'Expert',
-    'Next.js': 'Advanced',
-    'Material-UI': 'Advanced',
-    'Tailwind': 'Advanced',
-    'Redux': 'Advanced',
-    'Angular': 'Intermediate',
-    'Vue': 'Intermediate',
-    'Svelte': 'Beginner',
-    
-    // Backend
-    'Node.js': 'Expert',
-    'Express': 'Advanced',
-    'Python': 'Advanced',
-    'Django': 'Advanced',
-    'Flask': 'Advanced',
-    'GraphQL': 'Intermediate',
-    'REST': 'Expert',
-    'MongoDB': 'Advanced',
-    'PostgreSQL': 'Advanced',
-    'MySQL': 'Intermediate',
-    'Redis': 'Intermediate',
-    'FastAPI': 'Advanced',
-    'Microservices': 'Advanced',
-    'C': 'Intermediate',
-    
-    // DevOps/Cloud
-    'Docker': 'Advanced',
-    'Kubernetes': 'Intermediate',
-    'AWS': 'Advanced',
-    'Azure': 'Advanced',
-    'GCP': 'Beginner',
-    'CI/CD': 'Advanced',
-    'Terraform': 'Intermediate',
-    'Git': 'Expert',
-    'GitHub Actions': 'Advanced',
-    'Azure DevOps': 'Advanced',
-    
-    // Data
-    'CosmosDB': 'Intermediate',
-    'Firebase': 'Advanced',
-    
-    // OS
-    'Fedora': 'Advanced',
-    'Debian': 'Advanced',
-    'Ubuntu': 'Advanced',
-    'Windows': 'Advanced',
-    'Raspberry Pi OS': 'Intermediate',
-    'FreeRTOS': 'Beginner',
-    
-    // Mobile
-    'React Native': 'Advanced',
-    
-    // Outras
-    'Agile': 'Expert',
-    'Testing': 'Advanced',
-    'C++': 'Intermediate',
-    'Go': 'Beginner',
-    'Rust': 'Beginner',
-    'Julia': 'Intermediate',
-  };
-  
-  return SKILL_LEVELS[skill] || 'Intermediate';
 };
 
 export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({ open, onClose, skill }) => {

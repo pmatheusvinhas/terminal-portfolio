@@ -10,79 +10,18 @@ import BarChartIcon from '@mui/icons-material/BarChart';
 import CategoryIcon from '@mui/icons-material/Category';
 import GradientIcon from '@mui/icons-material/Gradient';
 
-// Mapeamento de níveis de habilidade
-const SKILL_LEVELS: Record<string, string> = {
-  // Frontend
-  'React': 'Expert',
-  'TypeScript': 'Expert',
-  'JavaScript': 'Expert',
-  'HTML/CSS': 'Expert',
-  'Next.js': 'Advanced',
-  'Material-UI': 'Advanced',
-  'Tailwind': 'Advanced',
-  'Redux': 'Advanced',
-  'Angular': 'Intermediate',
-  'Vue': 'Intermediate',
-  'Svelte': 'Beginner',
-  
-  // Backend
-  'Node.js': 'Expert',
-  'Express': 'Advanced',
-  'Python': 'Advanced',
-  'Django': 'Advanced',
-  'Flask': 'Advanced',
-  'GraphQL': 'Intermediate',
-  'REST': 'Expert',
-  'MongoDB': 'Advanced',
-  'PostgreSQL': 'Advanced',
-  'MySQL': 'Intermediate',
-  'Redis': 'Intermediate',
-  'FastAPI': 'Advanced',
-  'Microservices': 'Advanced',
-  'C': 'Intermediate',
-  
-  // DevOps/Cloud
-  'Docker': 'Advanced',
-  'Kubernetes': 'Intermediate',
-  'AWS': 'Advanced',
-  'Azure': 'Advanced',
-  'GCP': 'Beginner',
-  'CI/CD': 'Advanced',
-  'Terraform': 'Intermediate',
-  'Git': 'Expert',
-  'GitHub Actions': 'Advanced',
-  'Azure DevOps': 'Advanced',
-  
-  // Data
-  'CosmosDB': 'Intermediate',
-  'Firebase': 'Advanced',
-  
-  // OS
-  'Fedora': 'Advanced',
-  'Debian': 'Advanced',
-  'Ubuntu': 'Advanced',
-  'Windows': 'Advanced',
-  'Raspberry Pi OS': 'Intermediate',
-  'FreeRTOS': 'Beginner',
-  
-  // Mobile
-  'React Native': 'Advanced',
-  
-  // Outras
-  'Agile': 'Expert',
-  'Testing': 'Advanced',
-  'C++': 'Intermediate',
-  'Go': 'Beginner',
-  'Rust': 'Beginner',
-  'Julia': 'Intermediate',
-};
+// Definir interface para habilidades
+export interface Skill {
+  name: string;
+  level: string;
+}
 
 // Cores para as diferentes categorias
 const CATEGORY_COLORS: Record<string, string[]> = {
   'frontend': ['#61dafb', '#3178c6', '#f7df1e', '#e34f26'],
   'backend': ['#339933', '#4479a1', '#47a248', '#e10098'],
   'devops': ['#2496ed', '#326ce5', '#232f3e', '#0078d4'],
-  'ai/ml': ['#ee4c2c', '#ff6f00', '#f89939', '#0194e2'],
+  'ai': ['#ee4c2c', '#ff6f00', '#10a37f', '#6e5494', '#b7178c'],
   'languages': ['#3178c6', '#f7df1e', '#3776ab', '#00599c'],
   'mobile': ['#61dafb', '#7b42bc', '#a4c639', '#f05138'],
   'design': ['#f24e1e', '#fa6400', '#31a8ff', '#ff9a00'],
@@ -107,21 +46,32 @@ const LEVEL_VALUES = {
   'Beginner': 50
 };
 
+// Função para obter o nível de uma habilidade
+export const getSkillLevel = (skillName: string): string => {
+  for (const category of Object.values(resumeData.skills)) {
+    const skill = category.find(s => s.name === skillName);
+    if (skill) {
+      return skill.level;
+    }
+  }
+  return 'Intermediate'; // Valor padrão
+};
+
 // Função auxiliar para agrupar habilidades em níveis de proficiência
-const groupSkillsByLevel = (skills: string[]) => {
+const groupSkillsByLevel = (skills: Skill[]) => {
   const groups = {
-    expert: skills.filter(skill => (SKILL_LEVELS[skill] || 'Intermediate') === 'Expert'),
-    advanced: skills.filter(skill => (SKILL_LEVELS[skill] || 'Intermediate') === 'Advanced'),
-    intermediate: skills.filter(skill => (SKILL_LEVELS[skill] || 'Intermediate') === 'Intermediate'),
-    beginner: skills.filter(skill => (SKILL_LEVELS[skill] || 'Intermediate') === 'Beginner'),
+    expert: skills.filter(skill => skill.level === 'Expert'),
+    advanced: skills.filter(skill => skill.level === 'Advanced'),
+    intermediate: skills.filter(skill => skill.level === 'Intermediate'),
+    beginner: skills.filter(skill => skill.level === 'Beginner'),
   };
   return groups;
 };
 
 // Função para obter a cor da categoria com base no nome da habilidade
-const getCategoryColor = (skill: string): string => {
+const getCategoryColor = (skillName: string): string => {
   for (const [category, skills] of Object.entries(resumeData.skills)) {
-    if (skills.includes(skill)) {
+    if (skills.some(s => s.name === skillName)) {
       const colors = CATEGORY_COLORS[category.toLowerCase()] || CATEGORY_COLORS.other;
       return colors[Math.floor(Math.random() * colors.length)];
     }
@@ -131,13 +81,12 @@ const getCategoryColor = (skill: string): string => {
 
 // Componente para exibir habilidade com visual mais rico
 const SkillVisual: React.FC<{ 
-  skill: string, 
+  skill: Skill, 
   isHighlighted: boolean, 
   onClick: () => void, 
   animDelay: number,
   categoryColor: string
 }> = ({ skill, isHighlighted, onClick, animDelay, categoryColor }) => {
-  const level = SKILL_LEVELS[skill] || 'Intermediate';
   const theme = useTheme();
   
   return (
@@ -178,7 +127,7 @@ const SkillVisual: React.FC<{
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1, gap: 1 }}>
-          <TechBadge tech={skill} size="small" showLabel={false} />
+          <TechBadge tech={skill.name} size="small" showLabel={false} />
           <Typography 
             variant="subtitle2" 
             noWrap
@@ -187,7 +136,7 @@ const SkillVisual: React.FC<{
               color: isHighlighted ? 'primary.main' : 'text.primary'
             }}
           >
-            {skill}
+            {skill.name}
           </Typography>
         </Box>
 
@@ -203,10 +152,8 @@ const SkillVisual: React.FC<{
               bgcolor: `${categoryColor}20` // Cor da categoria com 20% de opacidade
             }}
           >
-            {level}
+            {skill.level}
           </Typography>
-          
-          {/* Removendo o indicador visual de seleção (bola) */}
         </Box>
       </Paper>
     </motion.div>
@@ -216,9 +163,9 @@ const SkillVisual: React.FC<{
 // Componente para exibir uma categoria de habilidades
 const CategoryVisual: React.FC<{
   category: string, 
-  skills: string[],
+  skills: Skill[],
   highlighted: string | null,
-  onSkillClick: (skill: string) => void
+  onSkillClick: (skillName: string) => void
 }> = ({ category, skills, highlighted, onSkillClick }) => {
   const theme = useTheme();
   
@@ -285,11 +232,11 @@ const CategoryVisual: React.FC<{
       <Box sx={{ position: 'relative', zIndex: 1 }}>
         <Grid container spacing={2}>
           {skills.map((skill, index) => (
-            <Grid item xs={6} sm={4} md={6} lg={4} key={skill}>
+            <Grid item xs={6} sm={4} md={6} lg={4} key={skill.name}>
               <SkillVisual
                 skill={skill}
-                isHighlighted={highlighted === skill}
-                onClick={() => onSkillClick(skill)}
+                isHighlighted={highlighted === skill.name}
+                onClick={() => onSkillClick(skill.name)}
                 animDelay={index}
                 categoryColor={colors[index % colors.length]}
               />
@@ -303,22 +250,30 @@ const CategoryVisual: React.FC<{
 
 // Novo componente para visualização por nível de proficiência
 const SkillsByLevel: React.FC<{
-  skills: string[],
+  skills: Skill[],
   highlighted: string | null,
-  onSkillClick: (skill: string) => void
+  onSkillClick: (skillName: string) => void
 }> = ({ skills, highlighted, onSkillClick }) => {
   const theme = useTheme();
 
   // Agrupar todas as habilidades por nível
   const groupedSkills = useMemo(() => {
     // Remover duplicatas (priorizar a ocorrência na categoria mais relevante)
-    const uniqueSkills = Array.from(new Set(skills));
+    const uniqueSkillMap = new Map<string, Skill>();
+    
+    // Adicionar cada habilidade ao mapa, substituindo se já existir
+    skills.forEach(skill => {
+      uniqueSkillMap.set(skill.name, skill);
+    });
+    
+    // Converter de volta para array
+    const uniqueSkills = Array.from(uniqueSkillMap.values());
     
     return {
-      Expert: uniqueSkills.filter(skill => SKILL_LEVELS[skill] === 'Expert'),
-      Advanced: uniqueSkills.filter(skill => SKILL_LEVELS[skill] === 'Advanced'),
-      Intermediate: uniqueSkills.filter(skill => SKILL_LEVELS[skill] === 'Intermediate'),
-      Beginner: uniqueSkills.filter(skill => SKILL_LEVELS[skill] === 'Beginner')
+      Expert: uniqueSkills.filter(skill => skill.level === 'Expert'),
+      Advanced: uniqueSkills.filter(skill => skill.level === 'Advanced'),
+      Intermediate: uniqueSkills.filter(skill => skill.level === 'Intermediate'),
+      Beginner: uniqueSkills.filter(skill => skill.level === 'Beginner')
     };
   }, [skills]);
 
@@ -326,7 +281,7 @@ const SkillsByLevel: React.FC<{
   const chartData = useMemo(() => {
     return Object.entries(groupedSkills).flatMap(([level, levelSkills]) => 
       levelSkills.map(skill => ({
-        name: skill,
+        name: skill.name,
         value: LEVEL_VALUES[level as keyof typeof LEVEL_VALUES],
         level
       }))
@@ -486,13 +441,13 @@ export const Skills: React.FC = () => {
   const theme = useTheme();
 
   // Juntar todas as habilidades de todas as categorias
-  const allSkills = useMemo(() => {
+  const allSkills = useMemo<Skill[]>(() => {
     return Object.values(resumeData.skills).flat();
   }, []);
 
-  const handleSkillClick = (skill: string) => {
-    setHighlighted(skill);
-    setSelectedSkill(skill);
+  const handleSkillClick = (skillName: string) => {
+    setHighlighted(skillName);
+    setSelectedSkill(skillName);
     setModalOpen(true);
   };
 
