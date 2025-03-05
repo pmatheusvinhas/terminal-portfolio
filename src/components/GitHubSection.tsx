@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Paper, Grid, CircularProgress, useTheme } from '@mui/material';
-import { motion } from 'framer-motion';
 import { resumeData } from '../data/resume';
 import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, PieChart, Pie, Cell, ResponsiveContainer, Legend, LineChart, CartesianGrid, Line } from 'recharts';
 import { Code, Storage, Cloud, Timeline, Assessment, Speed } from '@mui/icons-material';
@@ -62,29 +61,10 @@ const COLORS = [
 ];
 
 export const GitHubSection: React.FC = () => {
-  const [stats, setStats] = useState<GithubStats>({
-    languages: {},
-    topTopics: {},
-    languagesByRepo: {},
-    totalBytes: 0,
-    activityByMonth: {},
-    domainFocus: {
-      backend: 0,
-      frontend: 0,
-      infrastructure: 0,
-    },
-    commitTrends: {
-      morning: 0,
-      afternoon: 0,
-      evening: 0,
-      night: 0,
-    }
-  });
-  const [repositories, setRepositories] = useState<Repository[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [pinnedRepos, setPinnedRepos] = useState<any[]>([]);
-  const [loadingPinned, setLoadingPinned] = useState<boolean>(true);
   const theme = useTheme();
+  const [stats, setStats] = useState<GithubStats | null>(null);
+  const [pinnedRepos, setPinnedRepos] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const username = resumeData.header.github.split('/').pop();
 
   const categorizeTech = (language: string): 'backend' | 'frontend' | 'infrastructure' => {
@@ -98,9 +78,14 @@ export const GitHubSection: React.FC = () => {
   useEffect(() => {
     const fetchGithubData = async () => {
       try {
+        setLoading(true);
+        
+        // Fetch user data
+        // const userData = await githubFetch(`https://api.github.com/users/${username}`);
+        
         // Fetch ALL repos (including private ones)
         const reposResponse = await githubFetch(
-          `https://api.github.com/user/repos?per_page=100&type=all&sort=updated`
+          `https://api.github.com/users/${username}/repos?per_page=100&sort=updated`
         );
         
         if (!reposResponse.ok) {
@@ -178,9 +163,10 @@ export const GitHubSection: React.FC = () => {
           }
         });
 
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching GitHub data:', error);
+      } catch (err) {
+        console.error('Error fetching GitHub data:', err);
+        // setError('Failed to load GitHub data');
+      } finally {
         setLoading(false);
       }
     };
@@ -208,19 +194,21 @@ export const GitHubSection: React.FC = () => {
   }, []);
 
   const prepareLanguageData = (): LanguageData[] => {
-    return Object.entries(stats.languages)
+    if (!stats) return [];
+    
+    return Object.entries(stats.languages || {})
       .map(([name, bytes]) => ({
         name,
         percentage: (bytes / stats.totalBytes) * 100,
         bytes
       }))
       .sort((a, b) => b.percentage - a.percentage)
-      .slice(0, 8); // Top 8 languages
+      .slice(0, 10);
   };
 
   const prepareProjectCountData = (): ProjectCountData[] => {
     const langCount: { [key: string]: number } = {};
-    Object.values(stats.languagesByRepo).forEach(repoLangs => {
+    Object.values(stats?.languagesByRepo || {}).forEach(repoLangs => {
       Object.keys(repoLangs).forEach(lang => {
         langCount[lang] = (langCount[lang] || 0) + 1;
       });
@@ -299,8 +287,8 @@ export const GitHubSection: React.FC = () => {
   );
 
   const renderMetrics = () => {
-    const totalProjects = Object.keys(stats.languagesByRepo).length;
-    const avgBytesPerProject = stats.totalBytes / totalProjects;
+    const totalProjects = Object.keys(stats?.languagesByRepo || {}).length;
+    const avgBytesPerProject = stats?.totalBytes || 0 / totalProjects;
     const mostUsedLang = prepareLanguageData()[0];
 
     return (
@@ -424,8 +412,8 @@ export const GitHubSection: React.FC = () => {
               maxWidth: 800,
               mx: 'auto'
             }}>
-              {Object.entries(stats.domainFocus).map(([domain, bytes]) => {
-                const total = Object.values(stats.domainFocus).reduce((a, b) => a + b, 0);
+              {Object.entries(stats?.domainFocus || {}).map(([domain, bytes]) => {
+                const total = Object.values(stats?.domainFocus || {}).reduce((a, b) => a + b, 0);
                 const percentage = ((bytes / total) * 100).toFixed(1);
                 
                 return (

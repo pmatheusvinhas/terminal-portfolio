@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Chip, Box, Typography, Grid, useTheme, useMediaQuery } from '@mui/material';
 import { skillCategories, getSkillDetails } from '../data/portfolioData';
 import { SkillLevel, SkillWithDetails } from '../types';
+import Link from '@mui/material/Link';
 
 // Skill level mapping
 const skillLevelLabels: Record<SkillLevel, string> = {
@@ -91,11 +92,11 @@ const SkillsSection: React.FC = () => {
                           }}>
                             <Typography variant="subtitle1" component="h4">
                               {project.url ? (
-                                <a 
+                                <Link 
                                   href={project.url} 
                                   target="_blank" 
                                   rel="noopener noreferrer"
-                                  style={{ 
+                                  sx={{ 
                                     color: theme.palette.primary.main,
                                     textDecoration: 'none',
                                     '&:hover': {
@@ -104,7 +105,7 @@ const SkillsSection: React.FC = () => {
                                   }}
                                 >
                                   {project.name}
-                                </a>
+                                </Link>
                               ) : (
                                 project.name
                               )}

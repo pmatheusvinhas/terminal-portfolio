@@ -1,12 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { Box, Typography, Paper, Grid, useTheme, Tooltip, ToggleButtonGroup, ToggleButton, Divider } from '@mui/material';
+import { Box, Typography, Paper, Grid, useTheme, Tooltip, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import TechBadge from './TechBadge';
 import { resumeData } from '../data/resume';
 import { BarChart, Bar, XAxis, YAxis, Tooltip as RechartsTooltip, Cell, ResponsiveContainer } from 'recharts';
 import SkillDetailModal from './SkillDetailModal';
-import ViewListIcon from '@mui/icons-material/ViewList';
-import BarChartIcon from '@mui/icons-material/BarChart';
 import CategoryIcon from '@mui/icons-material/Category';
 import GradientIcon from '@mui/icons-material/Gradient';
 
@@ -15,20 +13,6 @@ export interface Skill {
   name: string;
   level: string;
 }
-
-// Cores para as diferentes categorias
-const CATEGORY_COLORS: Record<string, string[]> = {
-  'frontend': ['#61dafb', '#3178c6', '#f7df1e', '#e34f26'],
-  'backend': ['#339933', '#4479a1', '#47a248', '#e10098'],
-  'devops': ['#2496ed', '#326ce5', '#232f3e', '#0078d4'],
-  'ai': ['#ee4c2c', '#ff6f00', '#10a37f', '#6e5494', '#b7178c'],
-  'languages': ['#3178c6', '#f7df1e', '#3776ab', '#00599c'],
-  'mobile': ['#61dafb', '#7b42bc', '#a4c639', '#f05138'],
-  'design': ['#f24e1e', '#fa6400', '#31a8ff', '#ff9a00'],
-  'database': ['#4479a1', '#47a248', '#336791', '#dc382d'],
-  'cloud': ['#232f3e', '#0078d4', '#4285f4'],
-  'other': ['#f05032', '#171515', '#007396', '#5849be'],
-};
 
 // Cores para níveis de proficiência
 const LEVEL_COLORS = {
@@ -57,26 +41,19 @@ export const getSkillLevel = (skillName: string): string => {
   return 'Intermediate'; // Valor padrão
 };
 
-// Função auxiliar para agrupar habilidades em níveis de proficiência
-const groupSkillsByLevel = (skills: Skill[]) => {
-  const groups = {
-    expert: skills.filter(skill => skill.level === 'Expert'),
-    advanced: skills.filter(skill => skill.level === 'Advanced'),
-    intermediate: skills.filter(skill => skill.level === 'Intermediate'),
-    beginner: skills.filter(skill => skill.level === 'Beginner'),
+// Adicionar a função getCategoryColor
+const getCategoryColor = (category: string): string[] => {
+  const colors: Record<string, string[]> = {
+    frontend: ['#FF6B6B', '#FF8E53', '#FFBD4A', '#FFD166'],
+    backend: ['#06D6A0', '#1B9AAA', '#126872', '#0B525B'],
+    devops: ['#118AB2', '#073B4C', '#05668D', '#0A2463'],
+    data: ['#7209B7', '#560BAD', '#480CA8', '#3A0CA3'],
+    os: ['#4CC9F0', '#4895EF', '#4361EE', '#3F37C9'],
+    mobile: ['#F72585', '#B5179E', '#7209B7', '#560BAD'],
+    other: ['#8338EC', '#3A86FF', '#38A3A5', '#57CC99']
   };
-  return groups;
-};
-
-// Função para obter a cor da categoria com base no nome da habilidade
-const getCategoryColor = (skillName: string): string => {
-  for (const [category, skills] of Object.entries(resumeData.skills)) {
-    if (skills.some(s => s.name === skillName)) {
-      const colors = CATEGORY_COLORS[category.toLowerCase()] || CATEGORY_COLORS.other;
-      return colors[Math.floor(Math.random() * colors.length)];
-    }
-  }
-  return '#777';
+  
+  return colors[category.toLowerCase()] || colors.other;
 };
 
 // Componente para exibir habilidade com visual mais rico
@@ -167,10 +144,8 @@ const CategoryVisual: React.FC<{
   highlighted: string | null,
   onSkillClick: (skillName: string) => void
 }> = ({ category, skills, highlighted, onSkillClick }) => {
-  const theme = useTheme();
-  
-  // Obter as cores para esta categoria
-  const colors = CATEGORY_COLORS[category.toLowerCase()] || CATEGORY_COLORS.other;
+  // Obter a cor da categoria
+  const categoryColor = getCategoryColor(category);
   
   return (
     <Paper 
@@ -238,7 +213,7 @@ const CategoryVisual: React.FC<{
                 isHighlighted={highlighted === skill.name}
                 onClick={() => onSkillClick(skill.name)}
                 animDelay={index}
-                categoryColor={colors[index % colors.length]}
+                categoryColor={categoryColor[index % categoryColor.length]}
               />
             </Grid>
           ))}
@@ -561,7 +536,7 @@ export const Skills: React.FC = () => {
             transition={{ duration: 0.3 }}
           >
             <Grid container spacing={3}>
-              {Object.entries(resumeData.skills).map(([category, skills], categoryIndex) => (
+              {Object.entries(resumeData.skills).map(([category, skills]) => (
                 <Grid item xs={12} md={6} key={category}>
                   <CategoryVisual 
                     category={category}

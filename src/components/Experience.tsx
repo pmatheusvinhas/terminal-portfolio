@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Typography, Paper, Chip, Grid, Tabs, Tab, useMediaQuery, useTheme, Divider } from '@mui/material';
+import { Box, Typography, Paper, Chip, useTheme } from '@mui/material';
 import { motion } from 'framer-motion';
-import TechBadge from './TechBadge';
 import { resumeData } from '../data/resume';
 import { ExpandedExperience } from './ExpandedExperience';
 
@@ -168,7 +167,7 @@ export const Experience: React.FC = () => {
 
             {exp.expanded && (
               <ExpandedExperience
-                expanded={exp.expanded}
+                expanded={exp.expanded as any}
                 company={exp.company}
                 showArchitecture={expandedStates[index]?.architecture || false}
                 showMetrics={expandedStates[index]?.metrics || false}

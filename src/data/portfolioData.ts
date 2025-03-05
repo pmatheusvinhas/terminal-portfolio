@@ -1,4 +1,4 @@
-import { Skill, Project, Experience, SkillWithDetails, SkillCategory } from '../types';
+import { Project, Experience, SkillWithDetails, SkillCategory } from '../types';
 
 // Skill data organized by categories
 export const skillCategories: SkillCategory[] = [

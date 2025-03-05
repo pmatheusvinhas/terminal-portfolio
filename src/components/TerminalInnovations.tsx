@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Box, Typography, Paper, CircularProgress, useTheme, useMediaQuery, Tooltip, IconButton } from '@mui/material';
+import { Box, Typography, Paper, CircularProgress, useTheme, Tooltip, IconButton } from '@mui/material';
 import { motion, AnimatePresence } from 'framer-motion';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-import InfoIcon from '@mui/icons-material/Info';
 import Assessment from '@mui/icons-material/Assessment';
 import Speed from '@mui/icons-material/Speed';
 import TechBadge from './TechBadge';
@@ -86,35 +85,36 @@ const featuredProjects: Project[] = [
 
 // Terminal component
 export const TerminalInnovations: React.FC = () => {
-  const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [showingDetails, setShowingDetails] = useState<boolean>(false);
-  const [loadingRepo, setLoadingRepo] = useState<boolean>(false);
-  const [projects, setProjects] = useState<Project[]>(featuredProjects);
-  const terminalRef = useRef<HTMLDivElement>(null);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [showProjectDetails, setShowProjectDetails] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const terminalRef = useRef<HTMLDivElement>(null);
+  const [projects, setProjects] = useState<Project[]>(featuredProjects);
 
   // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (showingDetails) return; // Ignore keyboard when showing details
-      
       switch (e.key) {
         case 'ArrowUp':
-          setSelectedIndex(prev => (prev > 0 ? prev - 1 : prev));
+          setSelectedIndex(prev => {
+            return prev > 0 ? prev - 1 : prev;
+          });
           break;
         case 'ArrowDown':
-          setSelectedIndex(prev => (prev < projects.length - 1 ? prev + 1 : prev));
+          setSelectedIndex(prev => {
+            return prev < projects.length - 1 ? prev + 1 : prev;
+          });
           break;
         case 'Enter':
-          if (!showingDetails) handleSelectProject(selectedIndex);
+          if (!showProjectDetails) handleSelectProject();
           break;
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedIndex, showingDetails, projects.length]);
+  }, [selectedIndex, showProjectDetails, projects.length]);
 
   // Fetch GitHub data for the projects
   useEffect(() => {
@@ -146,17 +146,18 @@ export const TerminalInnovations: React.FC = () => {
     fetchProjectData();
   }, []);
 
-  // Terminal animation for "cloning" a repository
-  const handleSelectProject = (index: number) => {
-    setLoadingRepo(true);
+  const handleSelectProject = () => {
+    setLoading(true);
+    
+    // Simular tempo de clone
     setTimeout(() => {
-      setShowingDetails(true);
-      setLoadingRepo(false);
-    }, 2000); // Simulate clone operation
+      setShowProjectDetails(true);
+      setLoading(false);
+    }, 1500);
   };
 
   const resetTerminal = () => {
-    setShowingDetails(false);
+    setShowProjectDetails(false);
   };
 
   const TerminalPrompt = () => (
@@ -442,7 +443,7 @@ export const TerminalInnovations: React.FC = () => {
       }}
     >
       <AnimatePresence mode="wait">
-        {!showingDetails ? (
+        {!showProjectDetails ? (
           // Terminal listing view
           <motion.div
             initial={{ opacity: 0 }}
@@ -486,7 +487,7 @@ export const TerminalInnovations: React.FC = () => {
                   key={project.name}
                   onClick={() => {
                     setSelectedIndex(index);
-                    handleSelectProject(index);
+                    handleSelectProject();
                   }}
                   whileHover={{ x: 5 }}
                   sx={{
@@ -526,7 +527,7 @@ export const TerminalInnovations: React.FC = () => {
               ))}
             </Box>
             
-            {loadingRepo && (
+            {loading && (
               <Box sx={{ mt: 2, fontFamily: 'monospace' }}>
                 <Typography component="div">
                   <span style={{ color: theme.palette.primary.main }}>~/projects$</span> git clone {projects[selectedIndex].repo}
@@ -583,7 +584,7 @@ export const TerminalInnovations: React.FC = () => {
                     Technologies:
                   </Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                    {projects[selectedIndex].technologies.map(tech => (
+                    {projects[selectedIndex].technologies.map((tech: string) => (
                       <TechBadge 
                         key={tech}
                         tech={tech}
@@ -598,12 +599,10 @@ export const TerminalInnovations: React.FC = () => {
                     Key Features:
                   </Typography>
                   <Box sx={{ fontFamily: 'monospace', fontSize: '0.85rem' }}>
-                    {projects[selectedIndex].keyFeatures.map((feature, idx) => (
-                      <Box key={idx} sx={{ display: 'flex', py: 0.5 }}>
-                        <Typography component="span" sx={{ color: theme.palette.primary.main, mr: 1 }}>
-                          $
-                        </Typography>
-                        {feature}
+                    {projects[selectedIndex].keyFeatures.map((feature: string, idx: number) => (
+                      <Box key={idx} sx={{ display: 'flex', alignItems: 'center', mb: 0.5 }}>
+                        <Box component="span" sx={{ mr: 1, color: 'primary.main' }}>•</Box>
+                        <Typography variant="body2">{feature}</Typography>
                       </Box>
                     ))}
                   </Box>

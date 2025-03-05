@@ -41,4 +41,40 @@ export interface Experience {
   period: string;
   description: string;
   technologies: string[];
+}
+
+export interface ArchitectureDiagram {
+  title: string;
+  description: string;
+  imageUrl?: string;
+  type: 'flow' | 'architecture' | 'data';
+  guidelines?: string[];
+}
+
+export interface ExpandedExperience {
+  title: string;
+  description: string;
+  role: string;
+  period: string;
+  company: string;
+  metrics: Array<{
+    metric: string;
+    value: string;
+    context: string;
+    growth?: string;
+  }>;
+  architecture: {
+    overview: string;
+    diagrams?: ArchitectureDiagram[];
+    components: Array<{
+      name: string;
+      description: string;
+      techDetails: string;
+    }>;
+    challenges: Array<{
+      problem: string;
+      solution: string;
+      outcome: string;
+    }>;
+  };
 } 

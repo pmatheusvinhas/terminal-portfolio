@@ -21,6 +21,28 @@ interface ExpandedExperienceProps {
   onToggleMetrics: () => void;
 }
 
+// Definição de interface para métricas
+interface Metric {
+  metric: string;
+  value: string;
+  context: string;
+  growth?: string;
+}
+
+// Definição de interface para diagrama
+interface DiagramComponent {
+  name: string;
+  description: string;
+  techDetails: string;
+}
+
+// Definição de interface para desafio
+interface Challenge {
+  problem: string;
+  solution: string;
+  outcome: string;
+}
+
 export const ExpandedExperience: React.FC<ExpandedExperienceProps> = ({
   expanded,
   company,
@@ -90,38 +112,30 @@ export const ExpandedExperience: React.FC<ExpandedExperienceProps> = ({
   };
 
   const renderMetrics = (category: 'business' | 'technical' | 'scale', icon: JSX.Element, title: string, color: string) => {
-    const metrics = expanded.metrics[category];
-    if (!metrics?.length) return null;
+    const metricsData = expanded.metrics[category as keyof typeof expanded.metrics];
+    // Verificar se é um array e tem elementos
+    const metrics = Array.isArray(metricsData) && metricsData.length > 0 ? metricsData as Metric[] : null;
+    if (!metrics) return null;
 
     return (
       <Grid item xs={12} md={4}>
         <Paper 
           sx={{ 
-            p: 2,
+            p: 3, 
             height: '100%',
-            bgcolor: 'background.paper',
-            borderTop: `3px solid ${color}`,
-            '&:hover': {
-              transform: 'translateY(-4px)',
-              transition: 'transform 0.2s ease-in-out'
-            }
+            display: 'flex',
+            flexDirection: 'column'
           }}
         >
-          <Box sx={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: 1, 
-            mb: 2,
-            color: color
-          }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 2, gap: 1 }}>
             {icon}
-            <Typography variant="subtitle1">
+            <Typography variant="h6" component="h3">
               {title}
             </Typography>
           </Box>
 
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-            {metrics.map((metric, index) => (
+            {metrics.map((metric: Metric, index: number) => (
               <Paper
                 key={index}
                 sx={{
@@ -235,7 +249,7 @@ export const ExpandedExperience: React.FC<ExpandedExperienceProps> = ({
                 Architecture Diagrams
               </Typography>
               <Grid container spacing={3}>
-                {expanded.architecture.diagrams.map((diagram, index) => (
+                {expanded.architecture.diagrams.map((diagram: ArchitectureDiagram, index: number) => (
                   <Grid item xs={12} key={index}>
                     {renderDiagramWithGuidelines(diagram)}
                   </Grid>
@@ -247,7 +261,7 @@ export const ExpandedExperience: React.FC<ExpandedExperienceProps> = ({
           <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
             Key Components
           </Typography>
-          {expanded.architecture.components.map((component, index) => (
+          {expanded.architecture.components.map((component: DiagramComponent, index: number) => (
             <Box key={index} sx={{ mb: 2 }}>
               <Typography variant="subtitle1" color="primary">
                 {component.name}
@@ -264,7 +278,7 @@ export const ExpandedExperience: React.FC<ExpandedExperienceProps> = ({
           <Typography variant="h6" gutterBottom sx={{ mt: 3 }}>
             Technical Challenges
           </Typography>
-          {expanded.architecture.challenges.map((challenge, index) => (
+          {expanded.architecture.challenges.map((challenge: Challenge, index: number) => (
             <Box key={index} sx={{ mb: 2 }}>
               <Typography variant="subtitle1" color="error">
                 Problem: {challenge.problem}
