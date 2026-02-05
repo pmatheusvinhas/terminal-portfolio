@@ -19,7 +19,7 @@ export const resumeData = {
     },
     email: "paulomatheusvinhas@gmail.com",
     github: "https://github.com/pmatheusvinhas",
-    summary: `Senior Software Engineer with 6+ years of experience evolving from distributed systems to AI engineering. Started by architecting high-performance cloud-native solutions achieving sub-200ms latency for 1000+ req/s, progressed to data distribution platforms, and now specializing in AI systems engineering with focus on LLM orchestration and autonomous agents. Track record of reducing costs by 40% through intelligent system design across different domains.`
+    summary: `Senior Software Engineer with 7+ years of experience evolving from distributed systems to AI engineering. Started by architecting high-performance cloud-native solutions achieving sub-200ms latency for 1000+ req/s, progressed to data distribution platforms, and now specializing in AI systems engineering with focus on LLM orchestration and autonomous agents. Track record of reducing costs by 40% through intelligent system design across different domains.`
   },
 
   education: [
@@ -65,20 +65,38 @@ export const resumeData = {
 
   experience: [
     {
-      title: "Co-founder & Principal AI Engineer",
+      title: "AI Software Engineer",
+      company: "Flightline",
+      period: "May 2025 - Present",
+      location: "Remote",
+      description: [
+        "Joined US-based PE tech startup (25Madison venture studio portfolio) as second engineer on founding team, building full-stack platform (Python/FastAPI backend, React/TypeScript frontend) for AI-powered financial document analysis and due diligence automation",
+        "Evolved and scaled extraction pipeline using OpenAI GPT and R2R RAG on GCP with Kubernetes, owning comprehensive quality systems including backtesting framework and production monitoring with Sentry integration",
+        "Built ChatGPT MCP integration and evaluation system enabling rapid workflow iteration, developing tech-enabled service model with internal efficiency tooling for market research and competitive analysis",
+        "Collaborated directly with founders on technical decisions, infrastructure evolution, and client feedback integration, contributing to architectural strategy across the stack"
+      ],
+      techStack: ["Python", "FastAPI", "React", "TypeScript", "OpenAI", "R2R RAG", "MCP", "Firebase", "GCP", "Kubernetes", "Prefect", "MobX", "Pydantic", "Sentry"],
+      expandedFeatures: {
+        showArchitecture: false,
+        showMetrics: false,
+        showDiagrams: false
+      }
+    },
+    {
+      title: "Co-founder & Founding AI Engineer",
       company: "Vinbol",
       period: "Jan 2024 - Dec 2024",
       location: "Remote",
       description: [
-        "Led end-to-end development of an AI orchestration platform managing multiple LLMs (OpenAI, Anthropic, Cohere) with intelligent routing and performance optimization",
-        "Engineered autonomous AI agents for specialized tasks using LangChain, achieving 95% task completion rate and 40% cost reduction through context-aware model selection",
-        "Implemented MLOps pipeline with automated model evaluation, A/B testing, and performance monitoring handling 1K+ daily requests",
-        "Developed custom fine-tuning and prompt engineering framework improving model performance by 35% for domain-specific tasks"
+        "Co-founded and led technical development as founding engineer, building 0-1 AI orchestration platform from concept to production, owning all architectural decisions and infrastructure setup",
+        "Architected multi-LLM orchestration system (OpenAI, Anthropic, Cohere) with intelligent routing and autonomous agent framework using LangChain, achieving 40% cost reduction through context-aware model selection",
+        "Built full-stack platform using Python/FastAPI backend and Azure infrastructure, implementing MLOps pipeline with automated evaluation, A/B testing, and performance monitoring handling 1K+ daily requests",
+        "Managed contractor developers for specific deliverables while maintaining hands-on coding and architecture ownership, demonstrating technical leadership in early-stage startup environment"
       ],
       techStack: ["Python", "LangChain", "OpenAI", "Anthropic", "Cohere", "FastAPI", "Docker", "Azure", "MLflow"],
       expanded: {
         architecture: {
-          overview: "Advanced AI orchestration platform featuring autonomous agents, intelligent model selection, and MLOps infrastructure for optimal performance and cost efficiency",
+          overview: "AI orchestration platform featuring autonomous agents, automated model selection, and MLOps infrastructure for optimal performance and cost efficiency",
           components: [
             {
               name: "AI Agent Framework",
@@ -87,7 +105,7 @@ export const resumeData = {
             },
             {
               name: "Model Orchestration",
-              description: "Intelligent routing system with real-time performance optimization",
+              description: "Routing system with real-time performance optimization",
               techDetails: "Multi-LLM Integration, Dynamic Routing, Cost Optimization"
             },
             {
@@ -99,7 +117,7 @@ export const resumeData = {
           challenges: [
             {
               problem: "Complex multi-model orchestration",
-              solution: "Developed intelligent routing system with performance profiling",
+              solution: "Developed routing system with performance profiling",
               outcome: "40% cost reduction while maintaining 95% task success rate"
             },
             {
