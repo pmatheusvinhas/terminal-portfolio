@@ -22,123 +22,133 @@ export const PrintButton: React.FC = () => {
     };
 
     const addSection = (title: string, content: string) => {
-      checkSpace(30); // Verifica espaço para título + conteúdo inicial
-      
-      doc.setFontSize(16);
+      const lines = doc.splitTextToSize(content, doc.internal.pageSize.width - 2 * margin);
+      const neededSpace = 8 + (lines.length * 6) + 5; // título + conteúdo + espaço após
+      checkSpace(neededSpace); // Garante que título e conteúdo fiquem juntos
+
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
       doc.text(title, margin, y);
       y += 8;
-      
-      doc.setFontSize(12);
-      const lines = doc.splitTextToSize(content, doc.internal.pageSize.width - 2 * margin);
-      
-      // Verifica se precisa de nova página para o conteúdo
-      if (checkSpace(lines.length * 7)) {
-        doc.setFontSize(12);
-      }
-      
+
+      doc.setFontSize(11);
+      doc.setFont('helvetica', 'normal');
+
       doc.text(lines, margin, y);
-      y += lines.length * 7 + 5;
+      y += lines.length * 6 + 5;
     };
 
     // Header
-    doc.setFontSize(24);
+    doc.setFontSize(21);
+    doc.setFont('helvetica', 'bold');
     doc.text(header.name, margin, y);
-    y += 10;
+    y += 7;
+
     doc.setFontSize(12);
+    doc.setFont('helvetica', 'normal');
+    doc.text(header.title, margin, y);
+    y += 10;
+
+    doc.setFontSize(10);
     doc.text([
-      header.title,
-      `Location: ${header.location.current}`,
-      `Contact: ${header.email}`,
-      `GitHub: ${header.github}`
+      `${header.location.current}`,
+      `${header.email} | ${header.github}`
     ], margin, y);
-    y += 25;
+    y += 14;
 
     // Summary
-    const summaryLines = doc.splitTextToSize(header.summary, doc.internal.pageSize.width - 2 * margin);
-    checkSpace(summaryLines.length * 7 + 15);
     addSection('PROFESSIONAL SUMMARY', header.summary);
 
     // Technical Expertise
     const techContent = Object.entries(skills)
-      .map(([category, items]) => `${category}: ${items.join(' | ')}`)
+      .map(([category, items]) => {
+        const skillsList = items.map(skill => skill.name).join(', ');
+        return `${category.charAt(0).toUpperCase() + category.slice(1)}: ${skillsList}`;
+      })
       .join('\n');
-    checkSpace(40);
     addSection('TECHNICAL EXPERTISE', techContent);
 
     // Professional Experience
-    checkSpace(20);
-    doc.setFontSize(16);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
     doc.text('PROFESSIONAL EXPERIENCE', margin, y);
-    y += 10;
+    y += 8;
 
     experience.forEach(exp => {
-      // Verifica espaço para cada experiência
-      checkSpace(40);
+      // Verifica espaço para cada experiência (título + pelo menos 3 linhas de conteúdo)
+      checkSpace(30);
 
       // Título e período
-      doc.setFontSize(14);
-      doc.text(`${exp.title} | ${exp.company}`, margin, y);
-      y += 7;
       doc.setFontSize(12);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`${exp.title} | ${exp.company}`, margin, y);
+      y += 5;
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'italic');
       doc.text(`${exp.period} | ${exp.location}`, margin, y);
-      y += 7;
+      y += 6;
+      doc.setFont('helvetica', 'normal');
 
       // Métricas
+      doc.setFontSize(11);
       if (exp.expanded?.metrics) {
         Object.entries(exp.expanded.metrics).forEach(([_, items]) => {
           items.forEach(item => {
-            const metricText = `• ${item.metric}: ${item.value} ${item.context ? `(${item.context})` : ''}`;
+            const metricText = `  • ${item.metric}: ${item.value}${item.context ? ` - ${item.context}` : ''}`;
             const lines = doc.splitTextToSize(metricText, doc.internal.pageSize.width - 2 * margin);
-            
-            checkSpace(lines.length * 7);
+
+            checkSpace(lines.length * 6);
             doc.text(lines, margin, y);
-            y += lines.length * 7;
+            y += lines.length * 6;
           });
         });
       }
 
       // Descrições
       exp.description.forEach(desc => {
-        const lines = doc.splitTextToSize(`• ${desc}`, doc.internal.pageSize.width - 2 * margin);
-        checkSpace(lines.length * 7);
+        const lines = doc.splitTextToSize(`  • ${desc}`, doc.internal.pageSize.width - 2 * margin);
+        checkSpace(lines.length * 6);
         doc.text(lines, margin, y);
-        y += lines.length * 7;
+        y += lines.length * 6;
       });
 
       // Tech Stack
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'italic');
       const techStackLines = doc.splitTextToSize(
-        `Technical Environment: ${exp.techStack.join(' | ')}`,
+        `Technical Environment: ${exp.techStack.join(', ')}`,
         doc.internal.pageSize.width - 2 * margin
       );
-      checkSpace(techStackLines.length * 7 + 10);
+      checkSpace(techStackLines.length * 6 + 8);
       doc.text(techStackLines, margin, y);
-      y += techStackLines.length * 7 + 10;
+      doc.setFont('helvetica', 'normal');
+      y += techStackLines.length * 6 + 8;
     });
 
     // Education
     const eduContent = education
-      .map(edu => `${edu.degree}\n${edu.institution} (${edu.period})`)
+      .map(edu => `${edu.degree}\n  ${edu.institution}, ${edu.period}`)
       .join('\n\n');
-    checkSpace(30);
     addSection('EDUCATION', eduContent);
 
     // Certifications
     const certContent = certifications
-      .map(cert => `${cert.name} - ${cert.issuer} (${cert.year})`)
+      .map(cert => `  • ${cert.name} - ${cert.issuer}, ${cert.year}`)
       .join('\n');
-    checkSpace(30);
     addSection('PROFESSIONAL CERTIFICATIONS', certContent);
 
     // Portfolio Link
-    checkSpace(20);
-    doc.setFontSize(12);
+    checkSpace(15);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'italic');
     doc.setTextColor(0, 0, 238);
     doc.text(
-      'Portfolio & More About Me: https://pmatheusvinhas.github.io/terminal-portfolio',
+      'Portfolio & More: https://pmatheusvinhas.github.io/terminal-portfolio',
       margin,
       y
     );
     doc.setTextColor(0);
+    doc.setFont('helvetica', 'normal');
 
     doc.save('paulo-vinhas-cv.pdf');
   };

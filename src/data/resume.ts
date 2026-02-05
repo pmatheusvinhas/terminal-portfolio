@@ -19,10 +19,7 @@ export const resumeData = {
     },
     email: "paulomatheusvinhas@gmail.com",
     github: "https://github.com/pmatheusvinhas",
-    summary: `Senior Software Engineer with 6+ years of experience evolving from distributed systems to AI engineering. 
-    Started by architecting high-performance cloud-native solutions achieving sub-200ms latency for 1000+ req/s, 
-    progressed to data distribution platforms, and now specializing in AI systems engineering with focus on LLM orchestration and autonomous agents. 
-    Track record of reducing costs by 40% through intelligent system design across different domains.`
+    summary: `Senior Software Engineer with 6+ years of experience evolving from distributed systems to AI engineering. Started by architecting high-performance cloud-native solutions achieving sub-200ms latency for 1000+ req/s, progressed to data distribution platforms, and now specializing in AI systems engineering with focus on LLM orchestration and autonomous agents. Track record of reducing costs by 40% through intelligent system design across different domains.`
   },
 
   education: [
