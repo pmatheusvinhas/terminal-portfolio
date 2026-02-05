@@ -141,7 +141,7 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({ open, onClos
                 fontFamily: 'monospace'
               }
             }}>
-              Experiência Profissional
+              Professional Experience
             </Typography>
             
             {relatedExperiences.length > 0 ? (
@@ -195,7 +195,7 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({ open, onClos
               </Box>
             ) : (
               <Typography variant="body2" color="text.secondary" sx={{ mt: 1, fontStyle: 'italic' }}>
-                Nenhuma experiência profissional específica encontrada para esta tecnologia.
+                No specific professional experience found for this technology.
               </Typography>
             )}
           </Box>
@@ -215,7 +215,7 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({ open, onClos
                 fontFamily: 'monospace'
               }
             }}>
-              Projetos no GitHub
+              GitHub Projects
             </Typography>
             
             {loading ? (
@@ -307,7 +307,7 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({ open, onClos
                   </Box>
                 ) : (
                   <Typography variant="body2" color="text.secondary" sx={{ mt: 1, fontStyle: 'italic' }}>
-                    Nenhum projeto público encontrado usando esta tecnologia.
+                    No public projects found using this technology.
                   </Typography>
                 )}
                 
@@ -326,9 +326,9 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({ open, onClos
                   >
                     <Typography variant="body2" color="text.secondary">
                       <Box component="span" sx={{ fontWeight: 'bold', color: 'text.primary' }}>
-                        {privateRepos.length} {privateRepos.length === 1 ? 'projeto privado' : 'projetos privados'}
+                        {privateRepos.length} private {privateRepos.length === 1 ? 'project' : 'projects'}
                       </Box> {' '}
-                      também utiliza{privateRepos.length === 1 ? '' : 'm'} esta tecnologia (detalhes não podem ser compartilhados)
+                      also use{privateRepos.length === 1 ? 's' : ''} this technology (details cannot be shared)
                     </Typography>
                   </Paper>
                 )}
@@ -346,10 +346,10 @@ export const SkillDetailModal: React.FC<SkillDetailModalProps> = ({ open, onClos
         justifyContent: 'space-between'
       }}>
         <Typography variant="caption" color="text.secondary">
-          Experiência com {skill} desde {new Date().getFullYear() - Math.floor(Math.random() * 5) - 1}
+          Experience with {skill} since {new Date().getFullYear() - Math.floor(Math.random() * 5) - 1}
         </Typography>
         <Button onClick={onClose} color="primary" variant="outlined">
-          Fechar
+          Close
         </Button>
       </DialogActions>
     </Dialog>

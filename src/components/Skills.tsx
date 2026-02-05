@@ -487,7 +487,7 @@ export const Skills: React.FC = () => {
           }}>
             <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: theme.palette.primary.main }} />
             <Typography variant="caption" color="text.secondary">
-              Clique para detalhes
+              Click for details
             </Typography>
           </Box>
           
