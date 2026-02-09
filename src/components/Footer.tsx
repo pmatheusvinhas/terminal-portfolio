@@ -34,7 +34,7 @@ export const Footer: React.FC = () => {
         }}
       >
         <span style={{ color: '#03dac6' }}>{'// '}</span>
-        Yes, I tested in production. No, I have no regrets.
+        Yes, I centered that div. No, I don't remember how.
       </Typography>
     </Box>
   );
