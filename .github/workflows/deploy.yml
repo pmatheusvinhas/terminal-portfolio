@@ -2,7 +2,7 @@ name: Deploy static content to Pages
 
 on:
   push:
-    branches: ['main']
+    branches: ['personal']  # Deploy from personal branch with real data
   workflow_dispatch:
 
 permissions:
