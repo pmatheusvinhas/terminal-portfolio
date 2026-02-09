@@ -1,6 +1,21 @@
 # Terminal Portfolio
 
-A modern portfolio website with a retro terminal theme, built using React, TypeScript, and Material-UI.
+A modern, customizable portfolio template with a retro terminal theme, built using React, TypeScript, and Material-UI.
+
+## 🌿 Branch Structure
+
+This repository uses a dual-branch strategy:
+
+- **`main`** - Clean template with placeholder data (fork/clone this for your own portfolio)
+- **`personal`** - Live example with real data ([view demo](https://pmatheusvinhas.github.io/terminal-portfolio/))
+
+### Why Two Branches?
+
+- **Template Users**: Fork `main` and customize with your data
+- **Contributors**: Submit PRs to `main` for template improvements
+- **Reference**: Check `personal` branch to see a complete implementation
+
+> **Note**: GitHub Pages deploys from the `personal` branch. If you fork this, update `.github/workflows/deploy.yml` to deploy from `main` or your preferred branch.
 
 ## 🚀 Features
 
