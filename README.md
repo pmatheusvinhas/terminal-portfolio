@@ -1,228 +1,213 @@
 # Terminal Portfolio
 
-A modern, customizable portfolio template with a retro terminal theme, built using React, TypeScript, and Material-UI.
+A modern, customizable portfolio template with a retro terminal theme, built with React, TypeScript, and Material-UI.
 
-## 🌿 Branch Structure
-
-This repository uses a dual-branch strategy:
-
-- **`main`** - Clean template with placeholder data (fork/clone this for your own portfolio)
-- **`personal`** - Live example with real data ([view demo](https://pmatheusvinhas.github.io/terminal-portfolio/))
-
-### Why Two Branches?
-
-- **Template Users**: Fork `main` and customize with your data
-- **Contributors**: Submit PRs to `main` for template improvements
-- **Reference**: Check `personal` branch to see a complete implementation
-
-> **Note**: GitHub Pages deploys from the `personal` branch. If you fork this, update `.github/workflows/deploy.yml` to deploy from `main` or your preferred branch.
+**[View Live Demo →](https://pmatheusvinhas.github.io/terminal-portfolio/)**
 
 ## 🚀 Features
 
-- 🌙 Dark mode optimized design
+- 🌙 Dark mode optimized design with retro CRT effects
 - 📊 Real-time GitHub statistics and analytics
-- 💾 Interactive tech stack visualization
-- 🖨️ ATS-Optimized Resume Export
+- 💾 Interactive tech stack visualization with detailed skill modals
+- 🖨️ ATS-Optimized Resume Export (PDF)
 - 📱 Fully responsive layout
-- ⚡ Fast and optimized performance
+- ⚡ Fast and optimized with Vite
+- 🎨 150+ technology badges mapped
 
 ## 🎯 ATS Optimization
 
 This template is designed to be ATS (Applicant Tracking System) friendly:
 
-1. **Structured Data**: All resume data is centralized in `src/data/resume.ts` following ATS-friendly patterns
-2. **Keyword Optimization**: Skills and experiences are organized to maximize ATS parsing
-3. **Clean Export**: PDF generation with selectable text and clear hierarchy
-4. **Consistent Formatting**: Standardized sections and bullet points
-5. **Metrics Focus**: Easy to highlight quantifiable achievements
+- **Structured Data**: All resume data centralized in `src/data/resume.ts`
+- **Keyword Optimization**: Skills and experiences organized for maximum ATS parsing
+- **Clean Export**: PDF generation with selectable text and clear hierarchy
+- **Quantifiable Achievements**: Easy to highlight metrics and impact
 
-### Resume Export Options
-- **Web View**: Interactive portfolio with expanded details
-- **ATS PDF**: Clean, parseable format optimized for ATS
-- **Print Version**: Printer-friendly layout
+## 🛠️ Tech Stack
 
-## 🛠️ Built With
-
-- React
+- React 18
 - TypeScript
-- Material-UI
+- Material-UI (MUI)
 - Framer Motion
 - Recharts
-- GitHub API
+- Vite
+- GitHub API Integration
 
-## 🏃‍♂️ Running Locally
+## 🏃‍♂️ Quick Start
 
-1. Clone the repository
+### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/terminal-portfolio.git
-```
-
-2. Install dependencies
-```bash
+git clone https://github.com/pmatheusvinhas/terminal-portfolio.git
 cd terminal-portfolio
 npm install
 ```
 
-3. Create a `.env` file in the root directory and add your GitHub token:
-```
-VITE_GITHUB_TOKEN=your_github_token
+### 2. Customize your data
+
+Edit `src/data/resume.ts` with your information:
+
+```typescript
+export const resumeData = {
+  header: {
+    name: "Your Name",
+    title: "Your Title",
+    email: "your.email@example.com",
+    github: "https://github.com/yourusername",
+    summary: "Your professional summary..."
+  },
+  experience: [
+    {
+      title: "Job Title",
+      company: "Company Name",
+      period: "MMM YYYY - MMM YYYY",
+      description: [
+        "Achievement or responsibility 1",
+        "Achievement or responsibility 2"
+      ],
+      techStack: ["Tech1", "Tech2", "Tech3"]
+    }
+  ],
+  skills: {
+    backend: [{ name: "Python", level: "Advanced" }],
+    frontend: [{ name: "React", level: "Advanced" }],
+    // ... more categories
+  }
+  // ... education, certifications, etc.
+}
 ```
 
-4. Start the development server
+See `TEMPLATE_INSTRUCTIONS.md` for detailed customization guide.
+
+### 3. (Optional) Add GitHub Token
+
+For GitHub statistics integration:
+
+1. Create a GitHub Personal Access Token with `read:user` and `repo` permissions
+2. Add to `.env` file:
+```env
+VITE_GH_TOKEN=your_github_token_here
+```
+
+### 4. Run locally
 ```bash
 npm run dev
 ```
 
-## 🔑 GitHub Token Setup
+Visit `http://localhost:5173`
 
-To use the GitHub integration features:
-
-1. Go to GitHub Settings > Developer Settings > Personal Access Tokens
-2. Generate a new token with the following permissions:
-   - read:user
-   - read:project
-   - repo (for private repos statistics)
-3. Add the token to your repository secrets:
-   - Go to Settings > Secrets and variables > Actions
-   - Create a new secret named `PERSONAL_ACCESS_TOKEN`
-   - Paste your token
-4. Add the token to your local `.env` file:
-```
-VITE_GITHUB_TOKEN=your_github_token
-```
-
-## Images
-
-The project includes images in the `public/images` directory for the "Beyond Code" section. If you fork this project:
-
-1. Replace the images in `public/images` with your own:
+### 5. Build for production
 ```bash
-public/images/
-├── 1.jpg  # First showcase image
-├── 2.jpg  # Second showcase image
-└── 3.jpg  # Third showcase image
+npm run build
 ```
 
-2. Maintain the same naming convention (1.jpg, 2.jpg, 3.jpg)
-3. Recommended image size: 800x600px or similar aspect ratio
+## 🚢 Deployment
 
-## 📄 License
+### GitHub Pages
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+1. Update `vite.config.ts` with your repository name:
+```typescript
+export default defineConfig({
+  base: '/your-repo-name/',
+  // ...
+})
+```
 
-## 🛠️ Component Documentation
+2. Push to GitHub and enable Pages in repository settings
 
-### Tech Badge System
+3. The included GitHub Actions workflow will auto-deploy on push
 
-The portfolio includes a comprehensive tech badge system for visually representing technology skills:
+### Other Platforms
 
-#### Components
-- `TechBadge`: Renders a visual badge for each technology with a consistent appearance
-- `Skills`: Main component that displays all skills categorized with interactive features
-- `SkillDetailModal`: Shows detailed information when clicking on a skill, including:
-  - Related professional experience
+The built files in `dist/` can be deployed to:
+- Vercel
+- Netlify
+- Cloudflare Pages
+- Any static hosting service
+
+## 📝 Customization Guide
+
+### Replace Personal Images
+
+Update images in `public/images/` (used in "Beyond Code" section):
+```
+public/images/1.jpg
+public/images/2.jpg
+public/images/3.jpg
+```
+
+### Add Architecture Diagrams (Optional)
+
+For experiences with technical details, add diagrams to `public/diagrams/`:
+```
+public/diagrams/your-diagram.png
+```
+
+Reference in `resume.ts`:
+```typescript
+diagrams: [
+  {
+    title: "System Architecture",
+    description: "Overview of the system",
+    imageUrl: `${basePath}diagrams/your-diagram.png`
+  }
+]
+```
+
+### Customize Footer
+
+Edit `src/components/Footer.tsx` to personalize the footer message.
+
+### Adjust Theme Colors
+
+Modify `src/theme/index.ts` to change color scheme:
+```typescript
+palette: {
+  primary: { main: '#bb86fc' },  // Your primary color
+  secondary: { main: '#03dac6' }, // Your secondary color
+  // ...
+}
+```
+
+## 📋 Features Breakdown
+
+### Skills Section
+- View by category or proficiency level
+- Click any skill to see:
+  - Related professional experiences
   - GitHub projects using that technology
-  - Skill proficiency level
+  - Public and private project counts
 
-#### Features
-- **Skill Proficiency Levels**: Clear indication of expertise (Expert, Advanced, Intermediate, Beginner)
-- **GitHub Integration**: Dynamically fetches repositories that use the selected technology
-- **Professional Experience**: Links skills to job experience entries for context
-- **Interactive Visualization**: Toggle between list and chart views for different perspectives
-- **Privacy Control**: Distinguishes between public and private projects
+### Experience Section
+- Timeline visualization
+- Expandable details with architecture diagrams
+- Business, technical, and scale metrics
+- Tech stack badges
 
-#### Usage in Other Components
-The tech badges are used throughout the portfolio:
-- In the Skills section as interactive elements
-- In Experience entries as keyword tags
-- In project descriptions to highlight technologies used
+### GitHub Integration
+- Language statistics
+- Activity charts
+- Repository showcase
+- Contribution patterns
 
-#### Customization
-To add or modify skill levels, edit the `SKILL_LEVELS` constant in `src/components/Skills.tsx`.
-
-## 👨‍💻 Author & Credits
-
-**Original Author:** [Paulo Vinhas](https://github.com/pmatheusvinhas)
-
-If you use this project as a template for your portfolio, please give appropriate credit by linking back to the original repository and author.
-
-### Fork & Use Guidelines
-If you'd like to fork this project:
-1. Maintain the original author credits in your README
-2. Replace the content in `src/data/resume.ts` with your own information
-3. Consider starring the original repository if you find it useful
-
-## 🙏 Acknowledgments
-
-- Icons from [devicons](https://devicon.dev/)
-- Inspired by retro terminal interfaces
-- Built with React + TypeScript + Material-UI
-- GitHub integration for real-time analytics
-
+### PDF Export
+- ATS-optimized formatting
+- Selectable text
+- Clean hierarchy
+- Automatic page breaks
 
 ## 🤝 Contributing
 
-While this is primarily a personal portfolio template, bug fixes and improvements are welcome! Please feel free to:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a Pull Request
+Contributions are welcome! Feel free to:
+- Report bugs
+- Suggest new features
+- Submit pull requests
 
-## ⭐ Support
+## 📄 License
 
-If you found this project helpful, consider:
-- Giving it a star ⭐
-- Following the [author](https://github.com/pmatheusvinhas) on GitHub
-- Sharing it with others who might find it useful
+MIT License - feel free to use this template for your portfolio.
 
-## Customizing Diagrams
+## 💡 Credits
 
-The portfolio includes several architecture diagrams that you can customize:
+Created by [Paulo Vinhas](https://github.com/pmatheusvinhas)
 
-1. Check `/public/diagrams/examples/` for reference diagrams
-2. Use `/public/diagrams/templates/` as starting points
-3. Follow the guidelines in `src/config/diagrams.ts`
-4. Replace the diagrams in `/public/diagrams/` with your own
-
-### Diagram Requirements:
-- Follow recommended dimensions for consistent display
-- Maintain similar information hierarchy
-- Use clear and professional visual style
-- Include all key components and flows
-
-See individual diagram guidelines for specific recommendations.
-
-## Customizing Experiences
-
-Each experience in your portfolio can be customized with different levels of detail:
-
-### Expandable Features
-You can enable/disable different aspects for each experience:
-```typescript
-expandedFeatures: {
-  showArchitecture: boolean;  // Show technical architecture details
-  showMetrics: boolean;       // Show impact metrics
-  showDiagrams: boolean;      // Show architecture diagrams
-}
-```
-
-### Example Configuration:
-```typescript
-{
-  title: "Software Engineer",
-  company: "Example Corp",
-  // ... basic info ...
-  expandedFeatures: {
-    showArchitecture: true,   // Enable architecture section
-    showMetrics: true,        // Enable metrics section
-    showDiagrams: false       // Disable diagrams
-  },
-  expanded: {
-    // ... detailed content ...
-  }
-}
-```
-
-This allows you to:
-- Show only relevant information for each experience
-- Keep simpler experiences concise
-- Highlight complex projects with full details
+If you use this template, consider giving it a ⭐!
